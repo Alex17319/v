@@ -345,7 +345,7 @@
 					this.rsvpString = (
 						((this.rsvp || this.rsvpDate) && "RSVP ")
 						+ (this.rsvp && "to " + this.rsvp)
-						+ (this.rsvpDate && "by " + (this.rsvpMultiYear ? yearfulDateFormatter.format(this.rsvpDate) : yearlessDateFormatter.format(this.rsvpDate)))
+						+ (this.rsvpDate && "by " + (this.rsvpMultiYear ? yearfulDateFormatter.format(rsvpDateObj) : yearlessDateFormatter.format(rsvpDateObj)))
 					);
 				}
 			}
