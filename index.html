@@ -541,7 +541,28 @@
 							}
 						}
 						this.urlHashLoadFailed = true;
-					}
+					},
+					getLocalTimeZone() {
+						// Returns e.g. Australia/Hobart
+						return new Intl.DateTimeFormat().resolvedOptions().timeZone;
+					},
+					printTimeZone(timeZone, printFormat, locale, referenceDate) {
+						// timeZone should be in the format of e.g. Australia/Hobart
+						// printFormat should be one of "short", "long", "shortOffset", "longOffset", "shortGeneric", or "longGeneric"
+						// locale should be e.g. "en-AU" or defaults to the current locale
+						// referenceDate should be a Date, or defaults to the current date (this impacts whether the daylight-savings-time
+						// vs. standard-time timezone is printed, and reflects political changes e.g. countries switching timezone)
+						// See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/resolvedOptions
+						if (locale == null) locale = Intl.DateTimeFormat().resolvedOptions().locale;
+						if (referenceDate == null) referenceDate = new Date();
+						return new Intl.DateTimeFormat(locale, {timeZone: timeZone, timeZoneName: printFormat }).formatToParts(new Date(referenceDate)).find(x => x.type === 'timeZoneName').value
+					},
+					isTimezoneStatic(date1, date2, timeZone) {
+						// returns FALSE if a timezone is discontinuous between date1 and date2 due to a change of daylight savings (or e.g. a country switching timezone for political reasons), otherwise returns TRUE
+						let offset1 = printTimeZone(timeZone, "longOffset", "en-GB", date1);
+						let offset2 = printTimeZone(timeZone, "longOffset", "en-GB", date2);
+						return offset1 === offset2;
+					},
 				},
 				computed: {
 					eventString() {
