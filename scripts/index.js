@@ -185,9 +185,9 @@ const app = Vue.createApp({
     'v-select': window['vue-select'],
   },
   setup() {
-    const state = reactive({
+    const state = Vue.reactive({
       event2: new Event("", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", 5, ""),
-      computedTitle: computed(() => state.event2.title + " foo")
+      computedTitle: Vue.computed(() => state.event2.title + " foo")
     })
     
     return { state }
