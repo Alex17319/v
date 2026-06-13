@@ -116,8 +116,7 @@
 							</div>
 							<div class="col">
 								<label for="timezone">Timezone</label>
-		  						<input type="text" id="timezone" name="timezone" v-model="event.timezone" placeholder="ACDT">
-								<v-select :options="['aaaa', 'bbbbb', 'ccccccc']"></v-select>
+								<v-select id="timezone" name="timezone" v-model="event.timezone" :options="possibleTimezones"></v-select>
 							</div>
 						</div>
 						<div class="row">
