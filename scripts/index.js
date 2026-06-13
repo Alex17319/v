@@ -19,7 +19,7 @@ class Event {
       asdfasdf: Vue.computed(() => this.state.title + " bazbazbaz")
     });
     
-    this.title = title;
+    //this.title = title;
     this.location = location;
     this.startDatetime = startDatetime;
     this.endDatetime = endDatetime;
@@ -100,6 +100,9 @@ class Event {
     );
   }
 
+  get title() { return this.state.title; }
+  set title(x) { this.state.title = x; }
+  
   get asdfasdf() { return this.state.asdfasdf; }
 
   utcStartDateObj() { return this.startDatetime && this.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(this.startDatetime, this.timezone); }
