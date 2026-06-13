@@ -12,7 +12,7 @@ class EventUrlInfo {
 }
 
 class Event {
-  constructor(title, location, startDatetime, endDatetime, timezone, rsvp, rsvpDate, imageUrl, theme, rng, description, state) {
+  constructor(title, location, startDatetime, endDatetime, timezone, rsvp, rsvpDate, imageUrl, theme, rng, description) {
     this.title = title;
     this.location = location;
     this.startDatetime = startDatetime;
@@ -83,7 +83,8 @@ class Event {
     this.whimsicalEndTime   = endDateObj   && (this.endOnTheHour   ? whimsicalMinutelessTimeFormatter.format(endDateObj)   : whimsicalMinutefulTimeFormatter.format(endDateObj));
 
     //this.asdf = Vue.computed(() => title + "asdf");
-    this.asdf = Vue.computed(() => state?.event2 && (state.event2.title + "asdfasdfasdf"));
+    //this.asdf = Vue.computed(() => state?.event2 && (state.event2.title + "asdfasdfasdf"));
+    this.asdf = null;
 
     this.rsvpString = (
       ((this.rsvp || this.rsvpDate) && "RSVP ")
@@ -187,9 +188,12 @@ const app = Vue.createApp({
   },
   setup() {
     const state = Vue.reactive({
-      event2: new Event("testingtesting", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", 5, Vue.computed(() => state.event2.title + " bar"), Vue.computed(() => state)),
+      //event2: new Event("testingtesting", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", 5, Vue.computed(() => state.event2.title + " bar"), Vue.computed(() => state)),
+      event2: new Event("testingtesting", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", 5, Vue.computed(() => state.event2.title + " bar")),
       computedTitle: Vue.computed(() => state.event2.title + " foo")
-    })
+    });
+
+    state.event2.asdf = Vue.computed(() => state.event2.title + " asdfasdf");
     
     return { state }
   },
