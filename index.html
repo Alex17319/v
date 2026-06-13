@@ -114,9 +114,17 @@
 								<label for="end-datetime">End</label>
 			  					<input type="datetime-local" id="end-datetime" name="end-datetime" v-model="event.endDatetime" placeholder="2026-01-01">
 							</div>
+						</div>
+						<div class="row">
 							<div class="col">
 								<label for="timezone">Timezone</label>
 								<v-select id="timezone" name="timezone" v-model="event.timezone" :options="possibleTimezones"></v-select>
+								<div class="input-extra-details">
+									<div class="input-extra-details-heading">Info:</div>
+									<div>Event start: <span v-text="printTimeZone(event.timezone, 'longOffset', null, dateTimeStringToUTCString(event.startDatetime, event.timezone))"></span></div>
+									<div>&bull;</div>
+									<div>Event end: <span v-text="printTimeZone(event.timezone, 'longOffset', null, dateTimeStringToUTCString(event.endDatetime, event.timezone))"></span></div>
+								</div>
 							</div>
 						</div>
 						<div class="row">
