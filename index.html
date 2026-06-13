@@ -120,10 +120,10 @@
 								<label for="timezone">Timezone</label>
 								<v-select id="timezone" name="timezone" v-model="event.timezone" :options="possibleTimezones"></v-select>
 								<div class="input-extra-details">
-									<div class="input-extra-details-heading">Info:</div>
-									<div>Event start: <span v-text="event.utcStartDateObj && event.timezone && TimeZoneUtils.printTimeZone(event.timezone, 'longOffset', null, event.utcStartDateObj)"></span></div>
+									<div class="input-extra-details-heading">Event runs from:</div>
+									<div><span v-text="event.startDateTimeUTC"></span> to <span v-text="event.endDateTimeUTC"></span></div>
 									<div>&bull;</div>
-									<div>Event end: <span v-text="event.utcEndDateObj && event.timezone && TimeZoneUtils.printTimeZone(event.timezone, 'longOffset', null, event.utcEndDateObj)"></span></div>
+									<div><span v-text="event.startDateTimeWithOffset"></span> to <span v-text="event.endDateTimeWithOffset"></span></div>
 								</div>
 							</div>
 						</div>
