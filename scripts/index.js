@@ -16,7 +16,7 @@ class Event {
     this.state = Vue.reactive({
       title: title,
       location: location,
-      asdfasdf: Vue.computed(() => state.title + " bazbazbaz")
+      asdfasdf: Vue.computed(() => this.state.title + " bazbazbaz")
     });
     
     this.title = title;
