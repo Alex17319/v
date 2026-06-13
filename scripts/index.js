@@ -13,6 +13,12 @@ class EventUrlInfo {
 
 class Event {
   constructor(title, location, startDatetime, endDatetime, timezone, rsvp, rsvpDate, imageUrl, theme, rng, description) {
+    this.state = Vue.reactive({
+      title: title,
+      location: location,
+      asdfasdf: Vue.computed(() => state.title + " bazbazbaz")
+    });
+    
     this.title = title;
     this.location = location;
     this.startDatetime = startDatetime;
@@ -93,6 +99,8 @@ class Event {
       + (this.rsvpDate && "by " + (this.rsvpMultiYear ? yearfulDateFormatter.format(rsvpDateObj) : yearlessDateFormatter.format(rsvpDateObj)))
     );
   }
+
+  asdfasdf() { return this.state.asdfasdf; }
 
   utcStartDateObj() { return this.startDatetime && this.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(this.startDatetime, this.timezone); }
   utcEndDateObj() { return this.endDatetime && this.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(this.endDatetime, this.timezone); }
