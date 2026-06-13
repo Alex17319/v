@@ -121,9 +121,9 @@
 								<v-select id="timezone" name="timezone" v-model="event.timezone" :options="possibleTimezones"></v-select>
 								<div class="input-extra-details">
 									<div class="input-extra-details-heading">Info:</div>
-									<div>Event start: <span v-text="'asdf'"></span></div>
+									<div>Event start: <span v-text="event.utcStartDateObj && event.timezone && TimeZoneUtils.printTimeZone(event.timezone, 'longOffset', null, event.utcStartDateObj)"></span></div>
 									<div>&bull;</div>
-									<div>Event end: <span v-text="'asdf'"></span></div>
+									<div>Event end: <span v-text="event.utcEndDateObj && event.timezone && TimeZoneUtils.printTimeZone(event.timezone, 'longOffset', null, event.utcEndDateObj)"></span></div>
 								</div>
 							</div>
 						</div>
