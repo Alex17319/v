@@ -82,7 +82,7 @@ class Event {
     this.whimsicalStartTime = startDateObj && (this.startOnTheHour ? whimsicalMinutelessTimeFormatter.format(startDateObj) : whimsicalMinutefulTimeFormatter.format(startDateObj));
     this.whimsicalEndTime   = endDateObj   && (this.endOnTheHour   ? whimsicalMinutelessTimeFormatter.format(endDateObj)   : whimsicalMinutefulTimeFormatter.format(endDateObj));
 
-    this.asdf = state && Vue.computed(() => state.event2.title + "asdfasdfasdf");
+    this.asdf = Vue.computed(() => state && (state.event2.title + "asdfasdfasdf"));
 
     this.rsvpString = (
       ((this.rsvp || this.rsvpDate) && "RSVP ")
