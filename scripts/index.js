@@ -114,8 +114,8 @@ class TimeZoneUtils {
   
   static isTimezoneStatic(date1, date2, timeZone) {
     // returns FALSE if a timezone is discontinuous between date1 and date2 due to a change of daylight savings (or e.g. a country switching timezone for political reasons), otherwise returns TRUE
-    let offset1 = printTimeZone(timeZone, "longOffset", "en-GB", date1);
-    let offset2 = printTimeZone(timeZone, "longOffset", "en-GB", date2);
+    let offset1 = this.printTimeZone(timeZone, "longOffset", "en-GB", date1);
+    let offset2 = this.printTimeZone(timeZone, "longOffset", "en-GB", date2);
     return offset1 === offset2;
   }
   
@@ -126,8 +126,8 @@ class TimeZoneUtils {
     // The second attempt uses this approximate timezone-offset to get the correct timezone-offset
     // Finally (third attempt) a date is returned using the correct timezone-offset
     // Note: It might technically only need 2 attempts total, I'm not sure. I've tested it out across daylight-savings boundaries and it seems to work OK, so I don't wanna break anything
-    let attempt1 = printTimeZone(timeZone, "longOffset", "fr-FR", new Date(datetimeString + "Z"));
-    let attempt2 = printTimeZone(timeZone, "longOffset", "fr-FR", new Date(datetimeString + attempt1.replace("UTC", "")));
+    let attempt1 = this.printTimeZone(timeZone, "longOffset", "fr-FR", new Date(datetimeString + "Z"));
+    let attempt2 = this.printTimeZone(timeZone, "longOffset", "fr-FR", new Date(datetimeString + attempt1.replace("UTC", "")));
     return new Date(datetimeString + attempt2.replace("UTC", ""));
   }
 }
