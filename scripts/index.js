@@ -31,9 +31,9 @@ class Event {
       description: description,
       asdfasdf: Vue.computed(() => evt.title + " bazbazbaz"),
       startDateTimeUTC: function() { return this.utcStartDateObj() && new Intl.DateTimeFormat(undefined, {timeZone: 'UTC', dateStyle: 'short', timeStyle: 'long'}).format(this.utcStartDateObj()); },
-      endDateTimeUTC: function() { { return this.utcEndDateObj() && new Intl.DateTimeFormat(undefined, {timeZone: 'UTC', dateStyle: 'short', timeStyle: 'long'}).format(this.utcEndDateObj()); },
-      startDateTimeWithOffset: function() { { return this.utcStartDateObj() && new Intl.DateTimeFormat(undefined, {timeZone: this.timezone, dateStyle: 'short', timeStyle: 'long'}).format(this.utcStartDateObj()); },
-      endDateTimeWithOffset: function() { { return this.utcEndDateObj() && new Intl.DateTimeFormat(undefined, {timeZone: this.timezone, dateStyle: 'short', timeStyle: 'long'}).format(this.utcEndDateObj()); },
+      endDateTimeUTC: function() { return this.utcEndDateObj() && new Intl.DateTimeFormat(undefined, {timeZone: 'UTC', dateStyle: 'short', timeStyle: 'long'}).format(this.utcEndDateObj()); },
+      startDateTimeWithOffset: function() { return this.utcStartDateObj() && new Intl.DateTimeFormat(undefined, {timeZone: this.timezone, dateStyle: 'short', timeStyle: 'long'}).format(this.utcStartDateObj()); },
+      endDateTimeWithOffset: function() { return this.utcEndDateObj() && new Intl.DateTimeFormat(undefined, {timeZone: this.timezone, dateStyle: 'short', timeStyle: 'long'}).format(this.utcEndDateObj()); },
     });
 
     return evt;
