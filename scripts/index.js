@@ -100,7 +100,7 @@ class Event {
     );
   }
 
-  asdfasdf() { return this.state.asdfasdf; }
+  get asdfasdf() { return this.state.asdfasdf; }
 
   utcStartDateObj() { return this.startDatetime && this.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(this.startDatetime, this.timezone); }
   utcEndDateObj() { return this.endDatetime && this.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(this.endDatetime, this.timezone); }
