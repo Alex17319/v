@@ -119,10 +119,9 @@
 							<div class="col">
 								<label for="timezone">Timezone</label>
 								<v-select id="timezone" name="timezone" v-model="event.timezone" :options="possibleTimezones"></v-select>
-								<div class="input-extra-details">
-									<div class="input-extra-details-heading">Event runs from:</div>
+								<div class="timezone-details">
+									<div class="timezone-details-heading">Event runs from:</div>
 									<div><span v-text="event.startDateTimeUTC || '\u2014'"></span> to <span v-text="event.endDateTimeUTC || '\u2014'"></span></div>
-									<div>&bull;</div>
 									<div><span v-text="event.startDateTimeWithOffset || '\u2014'"></span> to <span v-text="event.endDateTimeWithOffset || '\u2014'"></span></div>
 								</div>
 							</div>
