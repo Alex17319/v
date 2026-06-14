@@ -28,82 +28,82 @@ class Event {
       asdfasdf: Vue.computed(() => this.state.title + " bazbazbaz")
     });
 
-    const startDetails = Vue.computed(() => this.state.startDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
-    const endDetails = Vue.computed(() => { debugger; return this.state.endDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups; });
-    const rsvpDetails = Vue.computed(() => this.state.rsvpDate?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
+    state.startDetails = Vue.computed(() => this.state.startDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
+    state.endDetails = Vue.computed(() => this.state.endDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
+    state.rsvpDetails = Vue.computed(() => this.state.rsvpDate?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
 
-    this.startDate = Vue.computed(() => startDetails && startDetails.yyyy + "-" + startDetails.MM + "-" + startDetails.dd);
-    this.endDate = Vue.computed(() => endDetails && endDetails.yyyy + "-" + endDetails.MM + "-" + endDetails.dd);
-    this.startTime = Vue.computed(() => startDetails && startDetails.hh + ":" + startDetails.mm);
-    this.endTime = Vue.computed(() => endDetails && endDetails.hh + ":" + endDetails.mm);
-    this.validRsvpDate = Vue.computed(() => rsvpDetails && rsvpDetails.yyyy + "-" + rsvpDetails.MM + "-" + rsvpDetails.dd);
+    this.startDate = Vue.computed(() => state.startDetails && state.startDetails.yyyy + "-" + state.startDetails.MM + "-" + state.startDetails.dd);
+    this.endDate = Vue.computed(() => state.endDetails && state.endDetails.yyyy + "-" + state.endDetails.MM + "-" + state.endDetails.dd);
+    this.startTime = Vue.computed(() => state.startDetails && state.startDetails.hh + ":" + state.startDetails.mm);
+    this.endTime = Vue.computed(() => state.endDetails && state.endDetails.hh + ":" + state.endDetails.mm);
+    this.validRsvpDate = Vue.computed(() => state.rsvpDetails && state.rsvpDetails.yyyy + "-" + state.rsvpDetails.MM + "-" + state.rsvpDetails.dd);
 
-    const startDateObj = Vue.computed(() => startDetails && new Date(+startDetails.yyyy, +startDetails.MM - 1 || 0, +startDetails.dd || 0, +startDetails.hh || 0, +startDetails.mm || 0));
-    const endDateObj = Vue.computed(() => { debugger; return endDetails && new Date(+endDetails.yyyy, +endDetails.MM - 1 || 0, +endDetails.dd || 0, +endDetails.hh || 0, +endDetails.mm || 0); });
-    const rsvpDateObj = Vue.computed(() => rsvpDetails && new Date(+rsvpDetails.yyyy, +rsvpDetails.MM - 1 || 0, +rsvpDetails.dd || 0, +rsvpDetails.hh || 23, +rsvpDetails.mm || 59));
+    state.startDateObj = Vue.computed(() => state.startDetails && new Date(+state.startDetails.yyyy, +state.startDetails.MM - 1 || 0, +state.startDetails.dd || 0, +state.startDetails.hh || 0, +state.startDetails.mm || 0));
+    state.endDateObj = Vue.computed(() => state.endDetails && new Date(+state.endDetails.yyyy, +state.endDetails.MM - 1 || 0, +state.endDetails.dd || 0, +state.endDetails.hh || 0, +state.endDetails.mm || 0));
+    state.rsvpDateObj = Vue.computed(() => state.rsvpDetails && new Date(+state.rsvpDetails.yyyy, +state.rsvpDetails.MM - 1 || 0, +state.rsvpDetails.dd || 0, +state.rsvpDetails.hh || 23, +state.rsvpDetails.mm || 59));
 
-    this.multiYear = Vue.computed(() => startDetails && endDetails && (startDetails.yyyy !== endDetails.yyyy));
-    this.rsvpMultiYear = Vue.computed(() => (rsvpDetails && startDetails && rsvpDetails.yyyy !== startDetails.yyyy) || (rsvpDetails && endDetails && rsvpDetails.yyyy !== endDetails.yyyy));
+    this.multiYear = Vue.computed(() => state.startDetails && state.endDetails && (state.startDetails.yyyy !== state.endDetails.yyyy));
+    this.rsvpMultiYear = Vue.computed(() => (state.rsvpDetails && state.startDetails && state.rsvpDetails.yyyy !== state.startDetails.yyyy) || (state.rsvpDetails && state.endDetails && state.rsvpDetails.yyyy !== state.endDetails.yyyy));
 
-    this.lateNight = Vue.computed(() => startDetails && endDetails && startDetails.yyyy === endDetails.yyyy && startDetails.MM === endDetails.MM && (+startDetails.dd + 1) === +endDetails.dd && +startDetails.hh > 12 && +endDetails.hh < 6);
-    this.multiDay = Vue.computed(() => startDetails && endDetails && !this.lateNight && (startDetails.yyyy !== endDetails.yyyy || startDetails.MM !== endDetails.MM || startDetails.dd !== endDetails.dd));
+    this.lateNight = Vue.computed(() => state.startDetails && state.endDetails && state.startDetails.yyyy === state.endDetails.yyyy && state.startDetails.MM === state.endDetails.MM && (+state.startDetails.dd + 1) === +state.endDetails.dd && +state.startDetails.hh > 12 && +state.endDetails.hh < 6);
+    this.multiDay = Vue.computed(() => state.startDetails && state.endDetails && !this.lateNight && (state.startDetails.yyyy !== state.endDetails.yyyy || state.startDetails.MM !== state.endDetails.MM || state.startDetails.dd !== state.endDetails.dd));
 
-    this.startOnTheHour = Vue.computed(() => startDetails?.mm === "00");
-    this.endOnTheHour = Vue.computed(() => endDetails?.mm === "00");
+    this.startOnTheHour = Vue.computed(() => state.startDetails?.mm === "00");
+    this.endOnTheHour = Vue.computed(() => state.endDetails?.mm === "00");
 
-    this.allDay = Vue.computed(() => startDetails?.hh === null && startDetails?.mm === null && endDetails?.hh === null && endDetails?.mm === null);
+    this.allDay = Vue.computed(() => state.startDetails?.hh === null && state.startDetails?.mm === null && state.endDetails?.hh === null && state.endDetails?.mm === null);
 
-    this.year = Vue.computed(() => startDetails?.yyyy);
-    this.endYear = Vue.computed(() => this.multiYear ? endDetails?.yyyy : null);
-    this.rsvpYear = Vue.computed(() => this.rsvpMultiYear ? rsvpDetails?.yyyy : null);
+    this.year = Vue.computed(() => state.startDetails?.yyyy);
+    this.endYear = Vue.computed(() => this.multiYear ? state.endDetails?.yyyy : null);
+    this.rsvpYear = Vue.computed(() => this.rsvpMultiYear ? state.rsvpDetails?.yyyy : null);
 
     const shortWeekdayFormatter = new Intl.DateTimeFormat(undefined, { weekday: "short" });
     const longWeekdayFormatter = new Intl.DateTimeFormat(undefined, { weekday: "long" });
     const yearlessDateFormatter = new Intl.DateTimeFormat(undefined, { day: "numeric", month: "numeric" });
     const yearfulDateFormatter = new Intl.DateTimeFormat(undefined, { day: "numeric", month: "numeric", year: "numeric" });
 
-    this.startShortWeekday = Vue.computed(() => startDateObj && shortWeekdayFormatter.format(startDateObj));
-    this.endShortWeekday = Vue.computed(() => endDateObj && shortWeekdayFormatter.format(endDateObj));
-    this.startLongWeekday = Vue.computed(() => startDateObj && longWeekdayFormatter.format(startDateObj));
-    this.endLongWeekday = Vue.computed(() => endDateObj && longWeekdayFormatter.format(endDateObj));
+    this.startShortWeekday = Vue.computed(() => state.startDateObj && shortWeekdayFormatter.format(state.startDateObj));
+    this.endShortWeekday = Vue.computed(() => state.endDateObj && shortWeekdayFormatter.format(state.endDateObj));
+    this.startLongWeekday = Vue.computed(() => state.startDateObj && longWeekdayFormatter.format(state.startDateObj));
+    this.endLongWeekday = Vue.computed(() => state.endDateObj && longWeekdayFormatter.format(state.endDateObj));
 
-    this.lessThanAWeek = Vue.computed(() => (endDateObj - startDateObj) < 1000 * 60 * 60 * 24 * 6);
+    this.lessThanAWeek = Vue.computed(() => (state.endDateObj - state.startDateObj) < 1000 * 60 * 60 * 24 * 6);
 
-    this.startYearlessDate = Vue.computed(() => startDateObj && yearlessDateFormatter.format(startDateObj));
-    this.startYearfulDate = Vue.computed(() => startDateObj && yearfulDateFormatter.format(startDateObj));
+    this.startYearlessDate = Vue.computed(() => state.startDateObj && yearlessDateFormatter.format(state.startDateObj));
+    this.startYearfulDate = Vue.computed(() => state.startDateObj && yearfulDateFormatter.format(state.startDateObj));
 
-    this.endYearlessDate = Vue.computed(() => endDateObj && yearlessDateFormatter.format(endDateObj));
-    this.endYearfulDate = Vue.computed(() => endDateObj && yearfulDateFormatter.format(endDateObj));
+    this.endYearlessDate = Vue.computed(() => state.endDateObj && yearlessDateFormatter.format(state.endDateObj));
+    this.endYearfulDate = Vue.computed(() => state.endDateObj && yearfulDateFormatter.format(state.endDateObj));
 
     const minutelessTimeFormatter = new Intl.DateTimeFormat(undefined, { hour: "numeric", hour12: true });
     const minutefulTimeFormatter = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit", hour12: true });
     const whimsicalMinutelessTimeFormatter = new Intl.DateTimeFormat(undefined, { hour: "numeric", hour12: true, dayPeriod: "long" });
     const whimsicalMinutefulTimeFormatter = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit", hour12: true, dayPeriod: "long" });
 
-    this.shortStartTime     = Vue.computed(() => startDateObj && (this.startOnTheHour ?          minutelessTimeFormatter.format(startDateObj) :          minutefulTimeFormatter.format(startDateObj)));
-    this.shortEndTime       = Vue.computed(() => endDateObj && endDetails && endDetails.yyyy && (this.endOnTheHour   ?          minutelessTimeFormatter.format(endDateObj)   :          minutefulTimeFormatter.format(endDateObj)));
-    this.whimsicalStartTime = Vue.computed(() => startDateObj && (this.startOnTheHour ? whimsicalMinutelessTimeFormatter.format(startDateObj) : whimsicalMinutefulTimeFormatter.format(startDateObj)));
-    this.whimsicalEndTime   = Vue.computed(() => endDateObj   && (this.endOnTheHour   ? whimsicalMinutelessTimeFormatter.format(endDateObj)   : whimsicalMinutefulTimeFormatter.format(endDateObj)));
+    this.shortStartTime     = Vue.computed(() => state.startDateObj && (this.startOnTheHour ?          minutelessTimeFormatter.format(state.startDateObj) :          minutefulTimeFormatter.format(state.startDateObj)));
+    this.shortEndTime       = Vue.computed(() => state.endDateObj   && (this.endOnTheHour   ?          minutelessTimeFormatter.format(state.endDateObj)   :          minutefulTimeFormatter.format(state.endDateObj)));
+    this.whimsicalStartTime = Vue.computed(() => state.startDateObj && (this.startOnTheHour ? whimsicalMinutelessTimeFormatter.format(state.startDateObj) : whimsicalMinutefulTimeFormatter.format(state.startDateObj)));
+    this.whimsicalEndTime   = Vue.computed(() => state.endDateObj   && (this.endOnTheHour   ? whimsicalMinutelessTimeFormatter.format(state.endDateObj)   : whimsicalMinutefulTimeFormatter.format(state.endDateObj)));
 
     //this.asdf = Vue.computed(() => title + "asdf");
     //this.asdf = Vue.computed(() => state?.event2 && (state.event2.title + "asdfasdfasdf"));
     this.asdf = null;
 
     this.rsvpString = Vue.computed(() => (
-      ((this.rsvp || this.rsvpDate) && "RSVP ")
-      + (this.rsvp && "to " + this.rsvp)
-      + (this.rsvp && this.rsvpDate && " ")
-      + (this.rsvpDate && "by " + (this.rsvpMultiYear ? yearfulDateFormatter.format(rsvpDateObj) : yearlessDateFormatter.format(rsvpDateObj)))
+      ((state.rsvp || state.rsvpDate) && "RSVP ")
+      + (state.rsvp && "to " + state.rsvp)
+      + (state.rsvp && state.rsvpDate && " ")
+      + (state.rsvpDate && "by " + (this.rsvpMultiYear ? yearfulDateFormatter.format(state.rsvpDateObj) : yearlessDateFormatter.format(state.rsvpDateObj)))
     ));
 
-    this.utcStartDateObj = Vue.computed(() => this.startDatetime && this.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(this.startDatetime, this.timezone));
-    this.utcEndDateObj = Vue.computed(() => this.endDatetime && this.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(this.endDatetime, this.timezone));
+    this.utcStartDateObj = Vue.computed(() => state.startDatetime && state.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(state.startDatetime, state.timezone));
+    this.utcEndDateObj = Vue.computed(() => state.endDatetime && state.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(state.endDatetime, state.timezone));
 
-    this.startTimeZoneOffset = Vue.computed(() => this.utcStartDateObj && TimeZoneUtils.printTimeZone(this.timezone, 'longOffset', undefined, this.utcStartDateObj));
-    this.endTimeZoneOffset = Vue.computed(() => this.utcEndDateObj && TimeZoneUtils.printTimeZone(this.timezone, 'longOffset', undefined, this.utcEndDateObj));
+    this.startTimeZoneOffset = Vue.computed(() => this.utcStartDateObj && TimeZoneUtils.printTimeZone(state.timezone, 'longOffset', undefined, this.utcStartDateObj));
+    this.endTimeZoneOffset = Vue.computed(() => this.utcEndDateObj && TimeZoneUtils.printTimeZone(state.timezone, 'longOffset', undefined, this.utcEndDateObj));
 
     const utcDateFormatter = new Intl.DateTimeFormat(undefined, {timeZone: 'UTC', dateStyle: 'short', timeStyle: 'long'});
-    const offsetDateFormatter = new Intl.DateTimeFormat(undefined, {timeZone: this.timezone, dateStyle: 'short', timeStyle: 'long'})
+    const offsetDateFormatter = new Intl.DateTimeFormat(undefined, {timeZone: timezone, dateStyle: 'short', timeStyle: 'long'})
     
     this.startDateTimeUTC = Vue.computed(() => this.utcStartDateObj && utcDateFormatter.format(this.utcStartDateObj));
     this.endDateTimeUTC = Vue.computed(() => this.utcEndDateObj && utcDateFormatter.format(this.utcEndDateObj));
