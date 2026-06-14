@@ -99,14 +99,17 @@ class Event {
     this.utcStartDateObj = Vue.computed(() => this.startDatetime && this.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(this.startDatetime, this.timezone));
     this.utcEndDateObj = Vue.computed(() => this.endDatetime && this.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(this.endDatetime, this.timezone));
 
-    this.startTimeZoneOffset = Vue.computed(() => return this.utcStartDateObj && TimeZoneUtils.printTimeZone(this.timezone, 'longOffset', undefined, this.utcStartDateObj));
-    this.endTimeZoneOffset = Vue.computed(() => return this.utcEndDateObj && TimeZoneUtils.printTimeZone(this.timezone, 'longOffset', undefined, this.utcEndDateObj));
+    this.startTimeZoneOffset = Vue.computed(() => this.utcStartDateObj && TimeZoneUtils.printTimeZone(this.timezone, 'longOffset', undefined, this.utcStartDateObj));
+    this.endTimeZoneOffset = Vue.computed(() => this.utcEndDateObj && TimeZoneUtils.printTimeZone(this.timezone, 'longOffset', undefined, this.utcEndDateObj));
 
-    this.startDateTimeUTC = Vue.computed(() => return this.utcStartDateObj && new Intl.DateTimeFormat(undefined, {timeZone: 'UTC', dateStyle: 'short', timeStyle: 'long'}).format(this.utcStartDateObj));
-    this.endDateTimeUTC = Vue.computed(() => return this.utcEndDateObj && new Intl.DateTimeFormat(undefined, {timeZone: 'UTC', dateStyle: 'short', timeStyle: 'long'}).format(this.utcEndDateObj));
+    const utcDateFormatter = new Intl.DateTimeFormat(undefined, {timeZone: 'UTC', dateStyle: 'short', timeStyle: 'long'});
+    const offsetDateFormatter = new Intl.DateTimeFormat(undefined, {timeZone: this.timezone, dateStyle: 'short', timeStyle: 'long'})
+    
+    this.startDateTimeUTC = Vue.computed(() => this.utcStartDateObj && utcDateFormatter.format(this.utcStartDateObj));
+    this.endDateTimeUTC = Vue.computed(() => this.utcEndDateObj && utcDateFormatter.format(this.utcEndDateObj));
 
-    this.startDateTimeWithOffset = Vue.computed(() => return this.utcStartDateObj && new Intl.DateTimeFormat(undefined, {timeZone: this.timezone, dateStyle: 'short', timeStyle: 'long'}).format(this.utcStartDateObj));
-    this.endDateTimeWithOffset = Vue.computed(() => return this.utcEndDateObj && new Intl.DateTimeFormat(undefined, {timeZone: this.timezone, dateStyle: 'short', timeStyle: 'long'}).format(this.utcEndDateObj));
+    this.startDateTimeWithOffset = Vue.computed(() => this.utcStartDateObj && offsetDateFormatter.format(this.utcStartDateObj));
+    this.endDateTimeWithOffset = Vue.computed(() => this.utcEndDateObj && offsetDateFormatter.format(this.utcEndDateObj));
   }
 
   get title() { return this.state.title; }
