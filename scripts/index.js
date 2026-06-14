@@ -29,17 +29,17 @@ class Event {
     });
 
     const startDetails = Vue.computed(() => this.state.startDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
-    const endDetails = Vue.computed(() => this.state.endDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
+    const endDetails = Vue.computed(() => { debugger; return this.state.endDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups; });
     const rsvpDetails = Vue.computed(() => this.state.rsvpDate?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
 
     this.startDate = Vue.computed(() => startDetails && startDetails.yyyy + "-" + startDetails.MM + "-" + startDetails.dd);
-    this.endDate = Vue.computed(() => { debugger; return endDetails && endDetails.yyyy + "-" + endDetails.MM + "-" + endDetails.dd; });
+    this.endDate = Vue.computed(() => endDetails && endDetails.yyyy + "-" + endDetails.MM + "-" + endDetails.dd);
     this.startTime = Vue.computed(() => startDetails && startDetails.hh + ":" + startDetails.mm);
     this.endTime = Vue.computed(() => endDetails && endDetails.hh + ":" + endDetails.mm);
     this.validRsvpDate = Vue.computed(() => rsvpDetails && rsvpDetails.yyyy + "-" + rsvpDetails.MM + "-" + rsvpDetails.dd);
 
     const startDateObj = Vue.computed(() => startDetails && new Date(+startDetails.yyyy, +startDetails.MM - 1 || 0, +startDetails.dd || 0, +startDetails.hh || 0, +startDetails.mm || 0));
-    const endDateObj = Vue.computed(() => endDetails && new Date(+endDetails.yyyy, +endDetails.MM - 1 || 0, +endDetails.dd || 0, +endDetails.hh || 0, +endDetails.mm || 0));
+    const endDateObj = Vue.computed(() => { debugger; return endDetails && new Date(+endDetails.yyyy, +endDetails.MM - 1 || 0, +endDetails.dd || 0, +endDetails.hh || 0, +endDetails.mm || 0); });
     const rsvpDateObj = Vue.computed(() => rsvpDetails && new Date(+rsvpDetails.yyyy, +rsvpDetails.MM - 1 || 0, +rsvpDetails.dd || 0, +rsvpDetails.hh || 23, +rsvpDetails.mm || 59));
 
     this.multiYear = Vue.computed(() => startDetails && endDetails && (startDetails.yyyy !== endDetails.yyyy));
