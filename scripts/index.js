@@ -111,8 +111,8 @@ class Event {
       + (s.rsvpDate && "by " + (s.rsvpMultiYear ? yearfulDateFormatter.format(s.rsvpDateObj) : yearlessDateFormatter.format(s.rsvpDateObj)))
     ));
 
-    s.utcStartDateObj = Vue.computed(() => s.startDatetime && s.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(s.startDatetime, s.timezone));
-    s.utcEndDateObj = Vue.computed(() => s.endDatetime && s.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(s.endDatetime, s.timezone));
+    s.utcStartDateObj = Vue.computed(() => s.startDate && s.startTime && s.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(s.startDatetime, s.timezone));
+    s.utcEndDateObj = Vue.computed(() => s.endDate && s.endTime && s.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(s.endDatetime, s.timezone));
 
     addComputed('startTimeZoneOffset', () => s.utcStartDateObj && TimeZoneUtils.printTimeZone(s.timezone, 'longOffset', undefined, s.utcStartDateObj));
     addComputed('endTimeZoneOffset', () => s.utcEndDateObj && TimeZoneUtils.printTimeZone(s.timezone, 'longOffset', undefined, s.utcEndDateObj));
