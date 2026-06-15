@@ -150,11 +150,13 @@ input {
 }
 /* don't try to wrap overflow for long timezone names, just clip instead */
 .search-and-select-box .vs__selected-options {
-	overflow: auto;
+	flex-wrap: nowrap;
+    container-type: inline-size;
 }
 .search-and-select-box .vs__selected {
-	max-width: 0;
-	white-space: nowrap;
+	max-width: 90%;
+	word-wrap: break-word;
+	display: inline;
 }
 
 .links-list {
