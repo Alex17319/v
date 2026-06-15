@@ -52,12 +52,12 @@ class Event {
     addWriteableComputed(
       'startDatetime',
       () => s.startDate + (s.startTime ? "T" + s.startTime : ""),
-      newValue => { s.startDate = newValue?.match(/(\d\d\d\d-\d\d-\d\d)/); s.startTime = newValue?.match(/\d\d:\d\d)/); }
+      newValue => { s.startDate = newValue?.match(/(\d\d\d\d-\d\d-\d\d)/); s.startTime = newValue?.match(/(\d\d:\d\d)/); }
     );
     addWriteableComputed(
       'endDatetime',
       () => s.endDate + (s.endTime ? "T" + s.startTime : ""),
-      newValue => { s.endDate = newValue?.match(/(\d\d\d\d-\d\d-\d\d)/); s.endTime = newValue?.match(/\d\d:\d\d)/); }
+      newValue => { s.endDate = newValue?.match(/(\d\d\d\d-\d\d-\d\d)/); s.endTime = newValue?.match(/(\d\d:\d\d)/); }
     );
 
     s.startDetails = Vue.computed(() => s.startDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
