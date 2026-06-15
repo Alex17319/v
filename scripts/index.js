@@ -12,12 +12,14 @@ class EventUrlInfo {
 }
 
 class Event {
-  constructor(title, location, startDatetime, endDatetime, timezone, rsvp, rsvpDate, imageUrl, theme, rng, description) {
+  constructor(title, location, startDate, startTime, endDate, endTime, timezone, rsvp, rsvpDate, imageUrl, theme, rng, description) {
     this.state = Vue.reactive({
       title: title,
       location: location,
-      startDatetime: startDatetime,
-      endDatetime: endDatetime,
+      startDate: startDate,
+      startTime: startTime,
+      endDate: endDate,
+      endTime: endTime,
       timezone: timezone,
       rsvp: rsvp,
       rsvpDate: rsvpDate,
@@ -39,7 +41,7 @@ class Event {
       });
     }
 
-    function addWritableComputed(name, getter, setter) {
+    function addWriteableComputed(name, getter, setter) {
       s[name] = Vue.computed({ get: getter, set: setter });
       Object.defineProperty(t, name, {
         get() { return s[name]; },
@@ -47,14 +49,25 @@ class Event {
       });
     }
 
+    addWriteableComputed(
+      'startDatetime',
+      () => s.startDate && (s.startTime ? "T" + s.startTime),
+      newValue => { s.startDate = newValue?.match(/(\d\d\d\d-\d\d-\d\d)/); s.startTime = newValue?.match(/\d\d:\d\d)/); }
+    );
+    addWriteableComputed(
+      'endDatetime',
+      () => s.endDate && (s.endTime ? "T" + s.startTime),
+      newValue => { s.endDate = newValue?.match(/(\d\d\d\d-\d\d-\d\d)/); s.endTime = newValue?.match(/\d\d:\d\d)/); }
+    );
+
     s.startDetails = Vue.computed(() => s.startDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
     s.endDetails = Vue.computed(() => s.endDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
     s.rsvpDetails = Vue.computed(() => s.rsvpDate?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
-
-    addWritableComputed('startDate', () => s.startDetails && s.startDetails.yyyy + "-" + s.startDetails.MM + "-" + s.startDetails.dd, newValue => { s.startDatetime = newValue + "T" + s.startTime });
-    addWritableComputed('endDate', () => s.endDetails && s.endDetails.yyyy + "-" + s.endDetails.MM + "-" + s.endDetails.dd, newValue => { s.endDatetime = newValue + "T" + s.endTime });
-    addWritableComputed('startTime', () => s.startDetails && s.startDetails.hh + ":" + s.startDetails.mm, newValue => { s.startDatetime = s.startDate + "T" + newValue });
-    addWritableComputed('endTime', () => s.endDetails && s.endDetails.hh + ":" + s.endDetails.mm, newValue => { s.endDatetime = s.endDate + "T" + newValue });
+    
+    //addWriteableComputed('startDate', () => s.startDetails && s.startDetails.yyyy + "-" + s.startDetails.MM + "-" + s.startDetails.dd, newValue => { s.startDatetime = newValue + "T" + s.startTime });
+    //addWriteableComputed('endDate', () => s.endDetails && s.endDetails.yyyy + "-" + s.endDetails.MM + "-" + s.endDetails.dd, newValue => { s.endDatetime = newValue + "T" + s.endTime });
+    //addWriteableComputed('startTime', () => s.startDetails && s.startDetails.hh + ":" + s.startDetails.mm, newValue => { s.startDatetime = s.startDate + "T" + newValue });
+    //addWriteableComputed('endTime', () => s.endDetails && s.endDetails.hh + ":" + s.endDetails.mm, newValue => { s.endDatetime = s.endDate + "T" + newValue });
     addComputed('validRsvpDate', () => s.rsvpDetails && s.rsvpDetails.yyyy + "-" + s.rsvpDetails.MM + "-" + s.rsvpDetails.dd);
 
     s.startDateObj = Vue.computed(() => s.startDetails && new Date(+s.startDetails.yyyy, +s.startDetails.MM - 1 || 0, +s.startDetails.dd || 0, +s.startDetails.hh || 0, +s.startDetails.mm || 0));
@@ -242,7 +255,7 @@ const app = Vue.createApp({
   },
   data() {
     return {
-      event: new Event("", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", this.randomInt(0,999), ""),
+      event: new Event("", "", "", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", this.randomInt(0,999), ""),
       urlBase: this.getUrlBase(),
       urlHash: window.location.hash.replace(/^#/, ''),
       urlHashLoaded: false,
@@ -335,7 +348,7 @@ const app = Vue.createApp({
       const time = (groups.hh && groups.mm) ? (groups.hh + ":" + groups.mm) : null;
       if (!date) return null;
       if (!!groups.hh !== !!groups.mm) return null; // time is partly present - fail fast by returning null
-      return date + (time ? "T" + time : "");
+      return { date: date, time: time };
     },
     randomInt(min, max) { // returns a number inclusive of min and max
       return Math.floor(Math.random() * (max + 1 - min) + min);
@@ -362,11 +375,13 @@ const app = Vue.createApp({
       return new Event(
         this.unescapeEventStringPart(arr[0]) || "", // title
         this.unescapeEventStringPart(arr[1]) || "", // location
-        start || "", // startDatetime
-        end || "", // endDatetime
+        start?.date || "", // startDate
+        start?.time || "", // startTime
+        end?.date || "", // endDate
+        end?.time || "", // endTime
         this.unescapeEventStringPart(arr[4]) || "", // timezone
         this.unescapeEventStringPart(arr[5]) || "", // rsvp
-        this.parseDatetime(arr[6]) || "", // rsvpDate
+        this.parseDatetime(arr[6])?.date || "", // rsvpDate
         !theme ? this.unescapeEventStringPart(arr[7]) : "", // imageUrl
         theme || "", // theme
         rng, // rng
