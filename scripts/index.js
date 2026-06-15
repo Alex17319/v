@@ -232,11 +232,6 @@ const app = Vue.createApp({
     UrlDisplay: urlDisplayComponent,
     'v-select': window['vue-select'],
   },
-  setup() {
-    return {
-      event2: Vue.reactive(new Event("", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", 5, "")),
-    }
-  },
   data() {
     return {
       event: new Event("", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", this.randomInt(0,999), ""),
