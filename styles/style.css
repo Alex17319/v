@@ -148,7 +148,7 @@ input {
     line-height: var(--vs-line-height);
     font-size: var(--vs-font-size);
 }
-/* don't try to wrap overflow for long timezone names, just clip instead */
+/* wrap overflow for long timezone names nicely (the default is messy) */
 .search-and-select-box .vs__selected-options {
 	flex-wrap: nowrap;
     container-type: inline-size;
