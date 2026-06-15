@@ -135,7 +135,7 @@ input {
 	border: 1px solid #f1f1f1;
 	cursor: pointer;
 	box-sizing: border-box;
-    width: calc(1.8em + 12px);
+    width: calc(2.2em + 12px);
 	margin-bottom: 10px;
     align-items: center;
     justify-content: center;
