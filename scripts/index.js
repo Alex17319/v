@@ -145,11 +145,17 @@ class Event {
   get location() { return this.state.location; }
   set location(x) { this.state.location = x; }
 
-  get startDatetime() { return this.state.startDatetime; }
-  set startDatetime(x) { this.state.startDatetime = x; }
+  get startDate() { return this.state.startDate; }
+  set startDate(x) { this.state.startDate = x; }
 
-  get endDatetime() { return this.state.endDatetime; }
-  set endDatetime(x) { this.state.endDatetime = x; }
+  get startTime() { return this.state.startTime; }
+  set startTime(x) { this.state.startTime = x; }
+
+  get endDate() { return this.state.endDate; }
+  set endDate(x) { this.state.endDate = x; }
+
+  get endTime() { return this.state.endTime; }
+  set endTime(x) { this.state.endTime = x; }
 
   get timezone() { return this.state.timezone; }
   set timezone(x) { this.state.timezone = x; }
