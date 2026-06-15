@@ -127,7 +127,7 @@ class Event {
     addWriteableComputed(
       'prettyTimezone',
       () => TimeZoneUtils.toPrettyTimezone(s.timezone),
-      (newValue) => TimeZoneUtils.fromPrettyTimezone(newValue)
+      (newValue) => s.timezone = TimeZoneUtils.fromPrettyTimezone(newValue)
     );
 
     s.utcStartDateObj = Vue.computed(() => s.startDate && s.startTime && s.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(s.startDatetime, s.timezone));
