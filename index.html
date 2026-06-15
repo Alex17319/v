@@ -92,7 +92,7 @@
 					</div>
 				</section>
 				<section class="section-edit">
-					<h1 v-if="urlHash">Edit</h1>
+					<h1 v-if="urlHash" v-cloak>Edit</h1>
 					<h1 v-else>Create Event</h1>
 					<form>
 						<div class="row">
@@ -109,18 +109,12 @@
 							<div class="col">
 								<label for="start-date">Start</label>
 			  					<input type="date" id="start-date" name="start-date" v-model="event.startDate" placeholder="2026-01-01">
-							</div>
-							<div class="col">
-								<label for="start-time">&nbsp;</label>
-								<input type="time" id="start-time" name="start-time" v-model="event.startTime" placeholder="5:00 PM">
+								<input type="time" id="start-time" name="start-time" v-model="event.startTime" placeholder="12:00">
 							</div>
 							<div class="col">
 								<label for="end-date">End</label>
 			  					<input type="date" id="end-date" name="end-date" v-model="event.endDate" placeholder="2026-01-01">
-							</div>
-							<div class="col">
-								<label for="end-time">&nbsp;</label>
-								<input type="time" id="end-time" name="end-time" v-model="event.endTime" placeholder="5:00 PM">
+								<input type="time" id="end-time" name="end-time" v-model="event.endTime" placeholder="12:00">
 							</div>
 						</div>
 						<div class="row">
