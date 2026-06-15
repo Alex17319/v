@@ -139,6 +139,11 @@ input {
 .search-and-select-box svg {
 	max-width: revert;
 }
+/* fix subtly different font size inside search and select box between 'typing' and 'option selected' modes */
+.search-and-select-box .vs__search, .search-and-select-box .vs__search:focus {
+    line-height: inherit;
+    font-size: inherit;
+}
 
 .links-list {
 	display: flex;
