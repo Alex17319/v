@@ -25,15 +25,14 @@ class Event {
       theme: theme,
       rng: rng,
       description: description,
-      asdfasdf: Vue.computed(() => this.state.title + " bazbazbaz")
     });
 
     const s = this.state;
-    const obj = this;
+    const t = this;
 
     function addComputed(name, func) {
       s[name] = Vue.computed(func);
-      Object.defineProperty(obj, name, {
+      Object.defineProperty(t, name, {
         get() {
           return s[name];
         },
@@ -97,10 +96,6 @@ class Event {
     addComputed('whimsicalStartTime', () => s.startDateObj && (s.startOnTheHour ? whimsicalMinutelessTimeFormatter.format(s.startDateObj) : whimsicalMinutefulTimeFormatter.format(s.startDateObj)));
     addComputed('whimsicalEndTime'  , () => s.endDateObj   && (s.endOnTheHour   ? whimsicalMinutelessTimeFormatter.format(s.endDateObj)   : whimsicalMinutefulTimeFormatter.format(s.endDateObj)));
 
-    //this.asdf = Vue.computed(() => title + "asdf");
-    //this.asdf = Vue.computed(() => state?.event2 && (state.event2.title + "asdfasdfasdf"));
-    this.asdf = null;
-
     addComputed('rsvpString', () => (
       ((s.rsvp || s.rsvpDate) && "RSVP ")
       + (s.rsvp && "to " + s.rsvp)
@@ -156,8 +151,6 @@ class Event {
 
   get description() { return this.state.description; }
   set description(x) { this.state.description = x; }
-
-  get asdfasdf() { return this.state.asdfasdf; }
 }
 
 class TimeZoneUtils {
@@ -240,15 +233,9 @@ const app = Vue.createApp({
     'v-select': window['vue-select'],
   },
   setup() {
-    const state = Vue.reactive({
-      //event2: new Event("testingtesting", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", 5, Vue.computed(() => state.event2.title + " bar"), Vue.computed(() => state)),
-      event2: Vue.reactive(new Event("testingtesting", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", 5, Vue.computed(() => state.event2.title + " bar"))),
-      computedTitle: Vue.computed(() => state.event2.title + " foo")
-    });
-
-    state.event2.asdf = Vue.computed(() => state.event2.title + " asdfasdf");
-    
-    return { state }
+    return {
+      event2: Vue.reactive(new Event("testingtesting", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", 5, "")),
+    }
   },
   data() {
     return {
