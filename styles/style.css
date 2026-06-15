@@ -65,6 +65,9 @@ input {
 .event-square .date-and-time {
 	
 }
+.event-square .timezone {
+	font-size: 0.8em;
+}
 .event-square .rsvp {
 	
 }
