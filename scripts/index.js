@@ -234,12 +234,12 @@ const app = Vue.createApp({
   },
   setup() {
     return {
-      event: Vue.reactive(new Event("", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", 5, "")),
+      event2: Vue.reactive(new Event("", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", 5, "")),
     }
   },
   data() {
     return {
-      event2: new Event("", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", this.randomInt(0,999), ""),
+      event: new Event("", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", this.randomInt(0,999), ""),
       urlBase: this.getUrlBase(),
       urlHash: window.location.hash.replace(/^#/, ''),
       urlHashLoaded: false,
