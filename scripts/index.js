@@ -30,6 +30,15 @@ class Event {
 
     const s = this.state;
 
+    function addComputed(name, func) {
+      s[name] = Vue.computed(func);
+      Object.defineProperty(this, name, {
+        get() {
+          return s[name];
+        },
+      });
+    }
+
     s.startDetails = Vue.computed(() => s.startDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
     s.endDetails = Vue.computed(() => s.endDatetime?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
     s.rsvpDetails = Vue.computed(() => s.rsvpDate?.match(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/)?.groups);
@@ -69,7 +78,7 @@ class Event {
     s.startLongWeekday = Vue.computed(() => s.startDateObj && longWeekdayFormatter.format(s.startDateObj));
     s.endLongWeekday = Vue.computed(() => s.endDateObj && longWeekdayFormatter.format(s.endDateObj));
 
-    this.lessThanAWeek = Vue.computed(() => (s.endDateObj - s.startDateObj) < 1000 * 60 * 60 * 24 * 6);
+    s.lessThanAWeek = Vue.computed(() => (s.endDateObj - s.startDateObj) < 1000 * 60 * 60 * 24 * 6);
 
     s.startYearlessDate = Vue.computed(() => s.startDateObj && yearlessDateFormatter.format(s.startDateObj));
     s.startYearfulDate = Vue.computed(() => s.startDateObj && yearfulDateFormatter.format(s.startDateObj));
@@ -91,11 +100,11 @@ class Event {
     //this.asdf = Vue.computed(() => state?.event2 && (state.event2.title + "asdfasdfasdf"));
     this.asdf = null;
 
-    s.rsvpString = Vue.computed(() => (
+    addComputed('rsvpString', () => (
       ((s.rsvp || s.rsvpDate) && "RSVP ")
       + (s.rsvp && "to " + s.rsvp)
       + (s.rsvp && s.rsvpDate && " ")
-      + (s.rsvpDate && "by " + (this.rsvpMultiYear ? yearfulDateFormatter.format(s.rsvpDateObj) : yearlessDateFormatter.format(s.rsvpDateObj)))
+      + (s.rsvpDate && "by " + (s.rsvpMultiYear ? yearfulDateFormatter.format(s.rsvpDateObj) : yearlessDateFormatter.format(s.rsvpDateObj)))
     ));
 
     s.utcStartDateObj = Vue.computed(() => s.startDatetime && s.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(s.startDatetime, s.timezone));
