@@ -124,7 +124,11 @@ class Event {
       + (s.rsvpDate && "by " + (s.rsvpMultiYear ? yearfulDateFormatter.format(s.rsvpDateObj) : yearlessDateFormatter.format(s.rsvpDateObj)))
     ));
 
-    addComputed('prettyTimezone', () => s.timezone?.replace(/\//g, ' \u203A ')?.replace(/_/g, ' '));
+    addWriteableComputed(
+      'prettyTimezone',
+      () => TimeZoneUtils.toPrettyTimezone(s.timezone),
+      (newValue) => TimeZoneUtils.fromPrettyTimezone(newValue)
+    );
 
     s.utcStartDateObj = Vue.computed(() => s.startDate && s.startTime && s.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(s.startDatetime, s.timezone));
     s.utcEndDateObj = Vue.computed(() => s.endDate && s.endTime && s.timezone && TimeZoneUtils.combineDatetimeAndTimezoneAsUTC(s.endDatetime, s.timezone));
@@ -216,6 +220,14 @@ class TimeZoneUtils {
     let attempt1 = this.printTimeZone(timeZone, "longOffset", "fr-FR", new Date(datetimeString + "Z"));
     let attempt2 = this.printTimeZone(timeZone, "longOffset", "fr-FR", new Date(datetimeString + attempt1.replace("UTC", "").replace("\u2212","-")));
     return new Date(datetimeString + attempt2.replace("UTC", "").replace("\u2212","-"));
+  }
+
+  // Convert IANA timezones to and from pretty timezones by replacing slashes "/" with chevrons " › " and replacing underscores with spaces
+  static toPrettyTimezone(timezone) {
+    return timezone?.replace(/\//g, ' \u203A ')?.replace(/_/g, ' ');
+  }
+  static fromPrettyTimezone(timezone) {
+    return timezone?.replace(/ \u203A /g, '\/')?.replace(/ /g, '_');
   }
 }
 
@@ -439,6 +451,9 @@ const app = Vue.createApp({
     eventStringEncoded() { return this.encode(this.eventString); },
     eventUrl() { return new EventUrlInfo(this.urlBase, this.eventString) },
     eventUrlEncoded() { return new EventUrlInfo(this.urlBase, this.eventStringEncoded) },
+    possiblePrettyTimezones() {
+      return this.possibleTimezones.map(x => TimeZoneUtils.toPrettyTimezone(x))
+    }
   },
   asyncComputed: {
     async eventStringCompressedEncoded() { return await this.compressAndEncode(this.eventString); },
