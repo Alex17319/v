@@ -29,10 +29,11 @@ class Event {
     });
 
     const s = this.state;
+    const obj = this;
 
     function addComputed(name, func) {
       s[name] = Vue.computed(func);
-      Object.defineProperty(this, name, {
+      Object.defineProperty(obj, name, {
         get() {
           return s[name];
         },
