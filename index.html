@@ -56,9 +56,9 @@
 								<div v-if="event.multiDay && event.allDay && event.lessThanAWeek && event.multiYear" v-text="event.startYearfulDate + ' \u2013 ' + event.endYearfulDate"></div>
 								<div v-if="event.multiDay && event.allDay && !event.lessThanAWeek && !event.multiYear" v-text="event.startShortWeekday + ' ' + event.startYearlessDate + ' \u2013 ' + event.endShortWeekday + ' ' + event.endYearfulDate"></div>
 								<div v-if="event.multiDay && event.allDay && !event.lessThanAWeek && event.multiYear" v-text="event.startShortWeekday + ' ' + event.startYearfulDate + ' \u2013 ' + event.endShortWeekday + ' ' + event.endYearfulDate"></div>
-	
-								<div v-if="event.timezone">&bull;</div>
-								<div v-if="event.timezone"><span v-text="event.timezone"></span></div>
+							</div>
+							<div class="timezone" v-if="event.timezone">
+								<div>Timezone: <span v-text="event.timezone"></span></div>
 							</div>
 							<div class="rsvp">
 								<div v-text="event.rsvpString"></div>
