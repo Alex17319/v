@@ -397,7 +397,7 @@ const app = Vue.createApp({
     getUrlBase() {
       return (window.location.host + window.location.pathname).replace(/[\/\\]+$/,'');
     },
-    parseEventString_old(str) {
+    parseEventString_old(arr) {
       const themeMatch = arr[7] && arr[7].match(/^(?<theme>[a-zA-Z]+)(?<rng>[0-9][0-9][0-9])$/);
       const theme = themeMatch && themeMatch.groups.theme?.toLowerCase();
       const rng = Number(themeMatch && themeMatch.groups.rng || this.randomInt(0,999));
@@ -430,7 +430,7 @@ const app = Vue.createApp({
       const arr = str.split("|");
       if (arr.length < 3) return null; // require at least a title, location, and start time
 
-      if (arr.length === 9) return this.parseEventString_old(str); // temporary backwards compatibility to update existing event strings
+      if (arr.length === 9) return this.parseEventString_old(arr); // temporary backwards compatibility to update existing event strings
       
       const themeMatch = arr[9] && arr[9].match(/^(?<theme>[a-zA-Z]+)(?<rng>[0-9][0-9][0-9])$/);
       const theme = themeMatch && themeMatch.groups.theme?.toLowerCase();
