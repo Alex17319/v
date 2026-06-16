@@ -136,9 +136,14 @@ input {
 	cursor: pointer;
 	box-sizing: border-box;
     width: calc(2.2em + 12px);
-	margin-bottom: 10px;
     align-items: center;
     justify-content: center;
+}
+.time-input-clearable button {
+	margin-bottom: 10px;
+}
+.timezone-details-toggle-label {
+	margin: 0;
 }
 .time-input-clearable button:hover, .timezone-details-toggle-label:hover {
 	background-color: #982c61;
@@ -149,7 +154,7 @@ input {
 	outline-style: solid;
 	outline-width: 2px;
 }
-.time-input-clearable svg.icon-x, .timezone-details-toggle-label svg.icon-info {
+.time-input-clearable svg.icon-x {
 	height: 1.8em;
     width: 1.8em;
 }
@@ -173,12 +178,16 @@ input {
 }
 .timezone-details {
 	grid-area: details;
-	max-height: 0px;
+	height: 0;
 	overflow: hidden;
-	transition: max-height .25s ease-in-out;
+	transition: height .25s ease-in-out;
 }
 .timezone-details-toggle:checked + .timezone-details-toggle-label + .timezone-details {
-  max-height: 100vh;
+	height: auto;
+}
+.timezone-details-toggle-label svg.icon-info {
+	height: 1.3em;
+    width: 1.3em;
 }
 
 /* copy the form input styling from sakura.css and apply this to search-and-select boxes too */
