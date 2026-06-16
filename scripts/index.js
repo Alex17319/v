@@ -183,6 +183,10 @@ class Event {
 
   get description() { return this.state.description; }
   set description(x) { this.state.description = x; }
+
+  regenerateThemeRNG() {
+    this.state.rng--;
+  }
 }
 
 class TimeZoneUtils {
