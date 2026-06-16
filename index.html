@@ -128,7 +128,7 @@
 								<label for="timezone">Timezone</label>
 								<div class="timezone-input-collapsible">
 									<v-select id="timezone" name="timezone" class="search-and-select-box" v-model="event.prettyTimezone" :options="possiblePrettyTimezones"></v-select>
-									<input id="timezone-details-button" class="timezone-details-toggle" type="checkbox">
+									<input id="timezone-details-button" class="timezone-details-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
  									<label for="timezone-details-button" class="icon-button timezone-details-toggle-label">
 										<icon-info></icon-info>
 									</label>
