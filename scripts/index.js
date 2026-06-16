@@ -144,7 +144,10 @@ class Event {
     addComputed('startDateTimeWithOffset', () => s.utcStartDateObj && new Intl.DateTimeFormat(undefined, {timeZone: s.timezone, dateStyle: 'short', timeStyle: 'long'}).format(s.utcStartDateObj));
     addComputed('endDateTimeWithOffset', () => s.utcEndDateObj && new Intl.DateTimeFormat(undefined, {timeZone: s.timezone, dateStyle: 'short', timeStyle: 'long'}).format(s.utcEndDateObj));
 
-    addComputed('rngSeed', () => { const validDateStr = s.rng?.match(/\d\d\d\d-\d\d-\d\d/)?[0]; return validDateStr ? Math.floor(new Date(validDateStr).getTime() / (60 * 60 * 24 * 1000)) : 0; });
+    addComputed('rngSeed', () => {
+      const dateMatch = s.rng?.match(/\d\d\d\d-\d\d-\d\d/);
+      return dateMatch ? Math.floor(new Date(dateMatch[0]).getTime() / (60 * 60 * 24 * 1000)) : 0;
+    });
   }
 
   get title() { return this.state.title; }
