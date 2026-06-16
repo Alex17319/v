@@ -132,8 +132,8 @@ input {
 	gap: 0.8em;
 }
 .time-input-clearable button, .timezone-details-toggle-label {
-	padding: 5px 5px;
-	display: inline-flex;
+	display: flex;
+	padding: 0;
 	background-color: #f1f1f1;
 	color: #4a4a4a;
 	border-radius: 4px;
@@ -141,6 +141,8 @@ input {
 	cursor: pointer;
 	box-sizing: border-box;
     width: calc(2.2em + 12px);
+	min-width: calc(2.2em + 12px);
+	max-width: calc(2.2em + 12px);
     align-items: center;
     justify-content: center;
 }
