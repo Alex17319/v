@@ -185,7 +185,9 @@ class Event {
   set description(x) { this.state.description = x; }
 
   regenerateThemeRNG() {
-    this.state.rng--;
+    var date = this.state.rng ? new Date(this.state.rng) : new Date();
+    date.setDate(date.getDate() - 1)
+    this.state.rng = date.toISOString().match(/\d\d\d\d-\d\d-\d\d/)[0];
   }
 }
 
@@ -281,7 +283,7 @@ const app = Vue.createApp({
   },
   data() {
     return {
-      event: new Event("", "", "", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", this.randomInt(0,999), ""),
+      event: new Event("", "", "", "", "", "", TimeZoneUtils.getLocalTimeZone(), "", "", "", "", new Date().toISOString().match(/\d\d\d\d-\d\d-\d\d/)[0], ""),
       urlBase: this.getUrlBase(),
       urlHash: window.location.hash.replace(/^#/, ''),
       urlHashLoaded: false,
