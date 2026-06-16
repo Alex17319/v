@@ -1,3 +1,7 @@
+html {
+	scrollbar-color: #a57bb0 #f9f9f9;
+}
+
 body {
 	padding: 0;
 	margin-block-end: 4em;
