@@ -22,6 +22,11 @@ input {
 	--grid-gutter: 1.25rem;
 }
 
+/* edit vue-select variables */
+:root {
+	--vs-font-size: 1em;
+}
+
 .section-event-display {
 	width: auto;
 	max-width: calc(min(100svh, 38em));
