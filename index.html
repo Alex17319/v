@@ -126,17 +126,17 @@
 						<div class="row">
 							<div class="col">
 								<label for="timezone">Timezone</label>
-								<div class="timezone-buttons-row">
+								<div class="timezone-input-collapsible">
 									<v-select id="timezone" name="timezone" class="search-and-select-box" v-model="event.prettyTimezone" :options="possiblePrettyTimezones"></v-select>
 									<input id="timezone-details-button" class="timezone-details-toggle" type="checkbox">
  									<label for="timezone-details-button" class="timezone-details-toggle-label">
 										<icon-info></icon-info>
 									</label>
-								</div>
-								<div class="timezone-details">
-									<div class="timezone-details-heading">Event runs from:</div>
-									<div><span v-text="event.startDateTimeUTC || '\u2014'"></span> to <span v-text="event.endDateTimeUTC || '\u2014'"></span></div>
-									<div><span v-text="event.startDateTimeWithOffset || '\u2014'"></span> to <span v-text="event.endDateTimeWithOffset || '\u2014'"></span></div>
+									<div class="timezone-details">
+										<div class="timezone-details-heading">Event runs from:</div>
+										<div><span v-text="event.startDateTimeUTC || '\u2014'"></span> to <span v-text="event.endDateTimeUTC || '\u2014'"></span></div>
+										<div><span v-text="event.startDateTimeWithOffset || '\u2014'"></span> to <span v-text="event.endDateTimeWithOffset || '\u2014'"></span></div>
+									</div>
 								</div>
 							</div>
 						</div>
