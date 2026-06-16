@@ -430,7 +430,7 @@ const app = Vue.createApp({
       const arr = str.split("|");
       if (arr.length < 3) return null; // require at least a title, location, and start time
 
-      if (arr.length === 7) return this.parseEventString_old(str); // temporary backwards compatibility to update existing event strings
+      if (arr.length === 9) return this.parseEventString_old(str); // temporary backwards compatibility to update existing event strings
       
       const themeMatch = arr[9] && arr[9].match(/^(?<theme>[a-zA-Z]+)(?<rng>[0-9][0-9][0-9])$/);
       const theme = themeMatch && themeMatch.groups.theme?.toLowerCase();
@@ -454,13 +454,13 @@ const app = Vue.createApp({
         startTime || "", // startTime
         endDate || "", // endDate
         endTime || "", // endTime
-        this.unescapeEventStringPart(arr[4]) || "", // timezone
-        this.unescapeEventStringPart(arr[5]) || "", // rsvp
-        this.parseDatetime(arr[6])?.date || "", // rsvpDate
-        !theme ? this.unescapeEventStringPart(arr[7]) : "", // imageUrl
+        this.unescapeEventStringPart(arr[6]) || "", // timezone
+        this.unescapeEventStringPart(arr[7]) || "", // rsvp
+        this.parseDatetime(arr[8])?.date || "", // rsvpDate
+        !theme ? this.unescapeEventStringPart(arr[9]) : "", // imageUrl
         theme || "", // theme
         rng, // rng
-        this.unescapeEventStringPart(arr[8]) || "" // description
+        this.unescapeEventStringPart(arr[10]) || "" // description
       )
     },
     async loadEventFromUrlHash(urlHash) {
