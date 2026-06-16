@@ -220,15 +220,18 @@ input {
 	flex-direction: row;
 	gap: 0.8em;
 }
-.theme-rng-regenerable input[type="date"] {
-	width: min-content;
-}
 .theme-rng-regenerable button.icon-button {
 	margin-bottom: 10px;
 }
 .theme-rng-regenerable svg.icon-repeat {
 	height: 1.3em;
     width: 1.3em;
+}
+.row.background-inputs .image-url, .row.background-inputs .theme {
+	flex-grow: 10;
+}
+.row.background-inputs .rng {
+	flex-grow: 1;
 }
 
 /* attempt to hide the native date picker. this only works on some platforms,
