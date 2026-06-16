@@ -131,40 +131,41 @@ input {
 	padding-inline: 13px;
 }
 
-.time-input-clearable {
-	display: flex;
-	flex-direction: row;
-	gap: 0.8em;
-}
-.time-input-clearable button, .timezone-details-toggle-label {
+.icon-button {
 	display: flex;
 	padding: 0;
+	margin: 0;
 	background-color: #f1f1f1;
 	color: #4a4a4a;
 	border-radius: 4px;
 	border: 1px solid #f1f1f1;
 	cursor: pointer;
 	box-sizing: border-box;
-    width: calc(2em + 12px);
-	min-width: calc(2em + 12px);
-	max-width: calc(2em + 12px);
-    align-items: center;
+	align-items: center;
     justify-content: center;
 }
-.time-input-clearable button {
-	margin-bottom: 10px;
-}
-.timezone-details-toggle-label {
-	margin: 0;
-}
-.time-input-clearable button:hover, .timezone-details-toggle-label:hover {
+.icon-button:hover {
 	background-color: #982c61;
 	color: #f9f9f9;
 	outline: 0;
 }
-.time-input-clearable button:focus-visible, .timezone-details-toggle-label:focus-visible {
+.icon-button:focus-visible {
 	outline-style: solid;
 	outline-width: 2px;
+}
+
+.time-input-clearable {
+	display: flex;
+	flex-direction: row;
+	gap: 0.8em;
+}
+.time-input-clearable button.icon-button, .icon-button.timezone-details-toggle-label {
+    width: calc(2em + 12px);
+	min-width: calc(2em + 12px);
+	max-width: calc(2em + 12px);
+}
+.time-input-clearable button.icon-button {
+	margin-bottom: 10px;
 }
 .time-input-clearable svg.icon-x {
 	height: 1.8em;
@@ -288,28 +289,10 @@ input {
 	flex-grow: 1;
 	padding: 0;
 }
-.url-preview-row .copy-button {
-    background-color: #f1f1f1;
-	border: none;
-    border-radius: 4px;
-	color: #4a4a4a;
-	padding: 0;
-	height: stretch;
+.url-preview-row .icon-button.copy-button {
     width: 3.2em;
     min-width: 3.2em;
-	cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.url-preview-row .copy-button:hover {
-	background-color: #982c61;
-	color: #f9f9f9;
-	outline: 0;
-}
-.url-preview-row .copy-button:focus-visible {
-	outline-style: solid;
-	outline-width: 2px;
+	max-width: 3.2em;
 }
 .url-preview-row .copy-button svg {
 	height: 1.5rem;
