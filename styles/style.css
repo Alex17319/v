@@ -174,7 +174,8 @@ input {
 
 .timezone-input-collapsible {
 	display: grid;
-	gap: 0.8em;
+	column-gap: 0.8em;
+	row-gap: 0;
 	grid-template-columns: 1fr min-content;
 	grid-template-areas: 
 	    "input toggle"
