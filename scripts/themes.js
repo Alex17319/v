@@ -27,30 +27,21 @@ class ThemesDB {
 
 class Theme {
   constructor(name, images, fonts) {
-    this.state = Vue.reactive({
-      name: name,
-      images: images,
-      fonts: fonts,
-    });
-
-    const s = this.state;
-    const t = this;
-
-    function addComputed(name, func) {
-      s[name] = Vue.computed(func);
-      Object.defineProperty(t, name, {
-        get() { return s[name]; },
-      });
-    }
+    this.name = name;
+    this.images = images;
+    this.fonts = fonts;
   }
 
-  randomlyGenerate(seedDate) {
-    const rng = new DeterministicRandom(seedDate);
-    console.log("random numbers:")
-    console.log(rng.next());
-    console.log(rng.next());
-    console.log(rng.next());
+  chooseAppearance(seed) {
+    const rng = new DeterministicRandom(seed);
+    const image = images[Theme.#randomInt(rng, 0, this.images.length - 1)];
+    const font = fonts[Theme.#randomInt(rng, 0, this.fonts.length - 1)];
+    return { image, font };
   }
+
+  static #randomInt(rng, min, max) { // returns a number inclusive of min and max
+    return Math.floor(rng.next() * (max + 1 - min) + min);
+  },
 }
 
 class DeterministicRandom {
