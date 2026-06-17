@@ -19,23 +19,30 @@ class ThemesDB {
 
   static getTheme(name) {
     const themeInfo = ThemesDB.#themeLog.filter(x => x.name === name);
-    const fonts = themeInfo.filter(x => x.font).map(x => x.font);
-    const images = themeInfo.filter(x => x.image).map(x => x.font);
-    return new Theme(name, images, fonts);
+    const fontLogs = themeInfo.filter(x => x.font);
+    const imageLogs = themeInfo.filter(x => x.image);
+    return new Theme(name, imageLogs, fontLogs);
   }
 }
 
 class Theme {
-  constructor(name, images, fonts) {
+  constructor(name, imageLogs, fontLogs) {
     this.name = name;
-    this.images = images;
-    this.fonts = fonts;
+    this.imageLogs = imageLogs;
+    this.fontLogs = fontLogs;
   }
 
-  chooseAppearance(seed) {
-    const rng = new DeterministicRandom(seed);
-    const image = images[Theme.#randomInt(rng, 0, this.images.length - 1)];
-    const font = fonts[Theme.#randomInt(rng, 0, this.fonts.length - 1)];
+  chooseAppearance(seedDate) {
+    if (!/\d\d\d\d-\d\d-\d\d/.test('2026-04-10')) return null;
+    
+    const rng = new DeterministicRandom(seedDate);
+    
+    const images = this.imageLogs?.filter(x => new Date(x.date) <= new Date(seedDate));
+    const fonts = this.fontLogs?.filter(x => new Date(x.date) <= new Date(seedDate));
+    
+    const image = images[Theme.#randomInt(rng, 0, images.length - 1)];
+    const font = fonts[Theme.#randomInt(rng, 0, fonts.length - 1)];
+    
     return { image, font };
   }
 
