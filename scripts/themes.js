@@ -57,8 +57,8 @@ class DeterministicRandom {
     
     // Initialise by first hashing the seed and then running the RNG a few times
     // See: https://stackoverflow.com/a/47593316
-    const rngSeed = cyrb53(seed + "");
-    this.rng = splitmix32(rngSeed);
+    const rngSeed = DeterministicRandom.cyrb53(seed + "");
+    this.rng = DeterministicRandom.splitmix32(rngSeed);
     for (let i = 0; i < 10; i++) this.rng();
   }
 
@@ -73,7 +73,7 @@ class DeterministicRandom {
    * See: https://gist.github.com/tommyettinger/46a874533244883189143505d203312c
    * See: https://github.com/bryc/code/blob/master/jshash/PRNGs.md
    */
-  splitmix32(state) {
+  static splitmix32(state) {
     return function() {
       state |= 0;
       state = state + 0x9e3779b9 | 0;
@@ -90,7 +90,7 @@ class DeterministicRandom {
    * A fast and simple 53-bit string hash function with decent collision resistance.
    * Largely inspired by MurmurHash2/3, but with a focus on speed/simplicity.
    */
-  cyrb53(str, seed = 0) {
+  static cyrb53(str, seed = 0) {
     let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
     for(let i = 0, ch; i < str.length; i++) {
       ch = str.charCodeAt(i);
