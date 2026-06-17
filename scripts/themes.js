@@ -2,8 +2,8 @@
 
 class ThemesDB {
   static #themeLog = [
-    logEntry('2026-06-17', 'nature', null, ['Roboto', 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap']),
-    logEntry('2026-06-17', 'nightclub', null, ['Roboto', 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap']),
+    ThemesDB.#logEntry('2026-06-17', 'nature', null, ['Roboto', 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap']),
+    ThemesDB.#logEntry('2026-06-17', 'nightclub', null, ['Roboto', 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap']),
   ];
 
   static #possibleThemes = null;
