@@ -41,7 +41,7 @@ class Theme {
 
   static #randomInt(rng, min, max) { // returns a number inclusive of min and max
     return Math.floor(rng.next() * (max + 1 - min) + min);
-  },
+  }
 }
 
 class DeterministicRandom {
