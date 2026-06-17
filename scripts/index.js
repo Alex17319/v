@@ -296,7 +296,7 @@ const app = Vue.createApp({
       urlHashLoaded: false,
       urlHashLoadFailed: false,
       possibleTimezones: Intl.supportedValuesOf('timeZone'),
-      possibleThemes: ['nature', 'nightclub']
+      possibleThemes: ThemesDB.getPossibleThemes()
     };
   },
   methods: {
@@ -533,7 +533,13 @@ const app = Vue.createApp({
     eventUrlEncoded() { return new EventUrlInfo(this.urlBase, this.eventStringEncoded) },
     possiblePrettyTimezones() {
       return this.possibleTimezones.map(x => DateUtils.toPrettyTimezone(x))
-    }
+    },
+    themeInfo() {
+      return this.event.theme && ThemesDB.getTheme(this.event.theme);
+    },
+    themeAppearance() {
+      return this.themeInfo?.chooseAppearance(this.event.rng);
+    },
   },
   asyncComputed: {
     async eventStringCompressedEncoded() { return await this.compressAndEncode(this.eventString); },
