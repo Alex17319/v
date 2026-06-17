@@ -7,7 +7,6 @@ class ThemesDB {
     ThemesDB.#logEntry('2026-01-01', 'nature', null, ['Bubblegum Sans', 'https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet" rel="stylesheet']),
     ThemesDB.#logEntry('2026-01-01', 'nature', null, ['Felipa', 'https://fonts.googleapis.com/css2?family=Felipa&display=swap" rel="stylesheet']),
     ThemesDB.#logEntry('2026-01-01', 'nature', null, ['Underdog', 'https://fonts.googleapis.com/css2?family=Underdog&display=swap" rel="stylesheet']),
-    ThemesDB.#logEntry('2026-01-01', 'nature', null, ['Lavishly Yours', 'https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap" rel="stylesheet']),
     ThemesDB.#logEntry('2026-01-01', 'nature', null, ['Cabin Sketch', 'https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet']),
     ThemesDB.#logEntry('2026-01-01', 'nature', null, ['Fredericka the Great', 'https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet']),
     ThemesDB.#logEntry('2026-01-01', 'nightclub', null, ['Limelight', 'https://fonts.googleapis.com/css2?family=Limelight&display=swap']),
