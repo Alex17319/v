@@ -144,6 +144,10 @@ input {
 	padding-inline: 13px;
 }
 
+.section-links {
+	padding-inline: 13px;
+}
+
 .icon-button {
 	display: flex;
 	padding: 0;
@@ -396,7 +400,6 @@ input {
 }
 
 .section-faq {
-	margin-block-start: 6.25rem;
 	padding-inline: 13px;
 }
 .section-faq p {
