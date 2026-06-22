@@ -97,89 +97,91 @@
 					</div>
 				</section>
 				<section class="section-edit">
-					<h1 v-if="urlHash" v-cloak>Edit</h1>
-					<h1 v-else>Create Event</h1>
-					<form>
-						<div class="row">
-							<div class="col-8">
-								<label for="title">Title</label>
-			  					<input type="text" id="title" name="title" v-model="event.title" placeholder="My Event">
-							</div>
-							<div class="col">
-								<label for="location">Location</label>
-			  					<input type="text" id="location" name="location" v-model="event.location" placeholder="Location TBA">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<label for="start-date">Start</label>
-			  					<input type="date" id="start-date" name="start-date" v-model="event.startDate" placeholder="2026-01-01">
-								<div class="time-input-clearable">
-									<input type="time" id="start-time" name="start-time" v-model="event.startTime" placeholder="12:00">
-									<button type="button" class="icon-button" v-on:click="event.startTime = null"><icon-x></icon-x></button>
+					<details>
+						<summary v-if="urlHash" class="h1" v-cloak>Edit</summary>
+						<summary v-else class="h1">Create Event</summary>
+						<form>
+							<div class="row">
+								<div class="col-8">
+									<label for="title">Title</label>
+				  					<input type="text" id="title" name="title" v-model="event.title" placeholder="My Event">
+								</div>
+								<div class="col">
+									<label for="location">Location</label>
+				  					<input type="text" id="location" name="location" v-model="event.location" placeholder="Location TBA">
 								</div>
 							</div>
-							<div class="col">
-								<label for="end-date">End</label>
-			  					<input type="date" id="end-date" name="end-date" v-model="event.endDate" placeholder="2026-01-01">
-								<div class="time-input-clearable">
-									<input type="time" id="end-time" name="end-time" v-model="event.endTime" placeholder="12:00">
-									<button type="button" class="icon-button" v-on:click="event.endTime = null"><icon-x></icon-x></button>
+							<div class="row">
+								<div class="col">
+									<label for="start-date">Start</label>
+				  					<input type="date" id="start-date" name="start-date" v-model="event.startDate" placeholder="2026-01-01">
+									<div class="time-input-clearable">
+										<input type="time" id="start-time" name="start-time" v-model="event.startTime" placeholder="12:00">
+										<button type="button" class="icon-button" v-on:click="event.startTime = null"><icon-x></icon-x></button>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<label for="timezone">Timezone</label>
-								<div class="timezone-input-collapsible">
-									<v-select id="timezone" name="timezone" class="search-and-select-box" v-model="event.prettyTimezone" :options="possiblePrettyTimezones"></v-select>
-									<input id="timezone-details-button" class="timezone-details-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
- 									<label for="timezone-details-button" class="icon-button timezone-details-toggle-label">
-										<icon-info></icon-info>
-									</label>
-									<div class="timezone-details">
-										<div class="timezone-details-heading">Event runs from:</div>
-										<div><span v-text="event.startDateTimeUTC || '\u2014'"></span> to <span v-text="event.endDateTimeUTC || '\u2014'"></span></div>
-										<div><span v-text="event.startDateTimeWithOffset || '\u2014'"></span> to <span v-text="event.endDateTimeWithOffset || '\u2014'"></span></div>
+								<div class="col">
+									<label for="end-date">End</label>
+				  					<input type="date" id="end-date" name="end-date" v-model="event.endDate" placeholder="2026-01-01">
+									<div class="time-input-clearable">
+										<input type="time" id="end-time" name="end-time" v-model="event.endTime" placeholder="12:00">
+										<button type="button" class="icon-button" v-on:click="event.endTime = null"><icon-x></icon-x></button>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<label for="rsvp">RSVP</label>
-		  						<input type="text" id="rsvp" name="rsvp" v-model="event.rsvp" placeholder="eventorganiser@example.com">
-							</div>
-							<div class="col">
-								<label for="rsvp-date">RSVP Date</label>
-		  						<input type="date" id="rsvp-date" name="rsvp-date" v-model="event.rsvpDate" placeholder="2026-01-01">
-							</div>
-						</div>
-						<div class="row background-inputs">
-							<div class="col image-url">
-								<label for="image-url">Image URL</label>
-		  						<input type="url" id="image-url" name="image-url" v-model="event.imageUrl" placeholder="https://example.com/event-poster.png">
-							</div>
-							<div class="col theme">
-								<label for="theme">Theme</label>
-								<v-select id="theme" name="theme" class="search-and-select-box" v-model="event.theme" :options="possibleThemes"></v-select>
-							</div>
-							<div class="col rng">
-								<label for="rng">RNG</label>
-								<div class="theme-rng-regenerable">
-		  							<input type="date" class="date-nopicker" :max="new Date().toISOString().match(/\d\d\d\d-\d\d-\d\d/)[0]" id="rng" name="rng" v-model="event.rng">
-									<button type="button" class="icon-button" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
-									<button type="button" class="icon-button floating-regenerate-button" tabindex="-1" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
+							<div class="row">
+								<div class="col">
+									<label for="timezone">Timezone</label>
+									<div class="timezone-input-collapsible">
+										<v-select id="timezone" name="timezone" class="search-and-select-box" v-model="event.prettyTimezone" :options="possiblePrettyTimezones"></v-select>
+										<input id="timezone-details-button" class="timezone-details-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
+	 									<label for="timezone-details-button" class="icon-button timezone-details-toggle-label">
+											<icon-info></icon-info>
+										</label>
+										<div class="timezone-details">
+											<div class="timezone-details-heading">Event runs from:</div>
+											<div><span v-text="event.startDateTimeUTC || '\u2014'"></span> to <span v-text="event.endDateTimeUTC || '\u2014'"></span></div>
+											<div><span v-text="event.startDateTimeWithOffset || '\u2014'"></span> to <span v-text="event.endDateTimeWithOffset || '\u2014'"></span></div>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<label for="description">Description</label>
-		  						<textarea id="description" name="description" v-model="event.description" placeholder="Description here"></textarea>
+							<div class="row">
+								<div class="col">
+									<label for="rsvp">RSVP</label>
+			  						<input type="text" id="rsvp" name="rsvp" v-model="event.rsvp" placeholder="eventorganiser@example.com">
+								</div>
+								<div class="col">
+									<label for="rsvp-date">RSVP Date</label>
+			  						<input type="date" id="rsvp-date" name="rsvp-date" v-model="event.rsvpDate" placeholder="2026-01-01">
+								</div>
 							</div>
-						</div>
-					</form>
+							<div class="row background-inputs">
+								<div class="col image-url">
+									<label for="image-url">Image URL</label>
+			  						<input type="url" id="image-url" name="image-url" v-model="event.imageUrl" placeholder="https://example.com/event-poster.png">
+								</div>
+								<div class="col theme">
+									<label for="theme">Theme</label>
+									<v-select id="theme" name="theme" class="search-and-select-box" v-model="event.theme" :options="possibleThemes"></v-select>
+								</div>
+								<div class="col rng">
+									<label for="rng">RNG</label>
+									<div class="theme-rng-regenerable">
+			  							<input type="date" class="date-nopicker" :max="new Date().toISOString().match(/\d\d\d\d-\d\d-\d\d/)[0]" id="rng" name="rng" v-model="event.rng">
+										<button type="button" class="icon-button" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
+										<button type="button" class="icon-button floating-regenerate-button" tabindex="-1" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label for="description">Description</label>
+			  						<textarea id="description" name="description" v-model="event.description" placeholder="Description here"></textarea>
+								</div>
+							</div>
+						</form>
+					</details>
 					<h1>Links</h1>
 					<div class="links-list">
 						<url-display :url="eventUrl"></url-display>
@@ -187,56 +189,58 @@
 					</div>
 				</section>
 				<section class="section-faq">
-					<h1>FAQ</h1>
-					<h6>What is this? How do I use it?</h6>
-					<p>
-						It's a quick way to share events. Just open a new page, fill out the form, copy a link,
-						and send it to friends! They can save the event to their calendars, or take a screenshot :))
-					</p>
-					<h6>Can I trust these event details?</h6>
-					<p>
-						It's as trustworthy as the person/page who sent it to you. Anyone can easily make a fake
-						event, or edit the details of an existing event before forwarding it. Make sure you trust
-						the person who sent you this event
-					</p>
-					<h6>Why is my link in Chinese?</h6>
-					<p>
-						Instagram allows people to share links on their story, but there's a character limit.
-						It turns out that by compressing the URL and using a wider range of Unicode characters,
-						we can fit a longer event into a short link. Unicode has a lot of Chinese/Asian characters,
-						so the links look Chinese! It's almost guaranteed to be nonsense to a Chinese reader though.
-					</p>
-					<h6>Do you store my data?</h6>
-					<p>
-						No. The event details are stored in the link; you don't need an account or anything else.
-						This site doesn't even have a database; there's no data to store! Nor are there cookies,
-						tracking, ads, or anything else.
-					</p>
-					<h6>Does GitHub store my data?</h6>
-					<p>
-						Yes. GitHub keeps a log of IP addresses who access the site, and might store other
-						server-side data such the URL you visited. Please consult GitHub's policies for details.
-					</p>
-					<h6>Can I use this site to share community/not-for-profit events?</h6>
-					<p>
-						Yes! Please go ahead
-					</p>
-					<h6>What about commercial/for-profit events?</h6>
-					<p>
-						Yes! Go ahead
-					</p>
-					<h6>What about sharing private events with friends &amp; family?</h6>
-					<p>
-						Yes! Go ahead, just be mindful that anyone could forward the link to new people
-					</p>
-					<h6>Can I copy the code and run this site on my own domain?</h6>
-					<p>
-						Yes, but only if you're running it without generating a profit. TBD legalese.
-					</p>
-					<h6>Someone sent me a dodgy event on this site. Can I hold this site liable?</h6>
-					<p>
-						No. TBD legalese.
-					</p>
+					<details>
+						<summary class="h1">FAQ</summary>
+						<h6>What is this? How do I use it?</h6>
+						<p>
+							It's a quick way to share events. Just open a new page, fill out the form, copy a link,
+							and send it to friends! They can save the event to their calendars, or take a screenshot :))
+						</p>
+						<h6>Can I trust these event details?</h6>
+						<p>
+							It's as trustworthy as the person/page who sent it to you. Anyone can easily make a fake
+							event, or edit the details of an existing event before forwarding it. Make sure you trust
+							the person who sent you this event
+						</p>
+						<h6>Why is my link in Chinese?</h6>
+						<p>
+							Instagram allows people to share links on their story, but there's a character limit.
+							It turns out that by compressing the URL and using a wider range of Unicode characters,
+							we can fit a longer event into a short link. Unicode has a lot of Chinese/Asian characters,
+							so the links look Chinese! It's almost guaranteed to be nonsense to a Chinese reader though.
+						</p>
+						<h6>Do you store my data?</h6>
+						<p>
+							No. The event details are stored in the link; you don't need an account or anything else.
+							This site doesn't even have a database; there's no data to store! Nor are there cookies,
+							tracking, ads, or anything else.
+						</p>
+						<h6>Does GitHub store my data?</h6>
+						<p>
+							Yes. GitHub keeps a log of IP addresses who access the site, and might store other
+							server-side data such the URL you visited. Please consult GitHub's policies for details.
+						</p>
+						<h6>Can I use this site to share community/not-for-profit events?</h6>
+						<p>
+							Yes! Please go ahead
+						</p>
+						<h6>What about commercial/for-profit events?</h6>
+						<p>
+							Yes! Go ahead
+						</p>
+						<h6>What about sharing private events with friends &amp; family?</h6>
+						<p>
+							Yes! Go ahead, just be mindful that anyone could forward the link to new people
+						</p>
+						<h6>Can I copy the code and run this site on my own domain?</h6>
+						<p>
+							Yes, but only if you're running it without generating a profit. TBD legalese.
+						</p>
+						<h6>Someone sent me a dodgy event on this site. Can I hold this site liable?</h6>
+						<p>
+							No. TBD legalese.
+						</p>
+					</details>
 				</section>
 			</main>
 		</div>
