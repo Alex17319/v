@@ -327,6 +327,10 @@ input {
 	font-size: 0.7em;
 	font-weight: bold;
 	color: #A57BB0;
+	white-space: nowrap;
+    word-break: keep-all;
+    text-wrap: nowrap;
+    text-wrap-mode: nowrap;
 }
 .url-preview .hash-icon-container {
 	display: inline-grid;
