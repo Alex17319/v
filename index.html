@@ -169,6 +169,7 @@
 								<div class="theme-rng-regenerable">
 		  							<input type="date" class="date-nopicker" :max="new Date().toISOString().match(/\d\d\d\d-\d\d-\d\d/)[0]" id="rng" name="rng" v-model="event.rng">
 									<button type="button" class="icon-button" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
+									<button type="button" class="icon-button floating-regenerate-button" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
 								</div>
 							</div>
 						</div>
@@ -178,7 +179,6 @@
 		  						<textarea id="description" name="description" v-model="event.description" placeholder="Description here"></textarea>
 							</div>
 						</div>
-						<button type="button" class="icon-button floating-regenerate-button" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
 					</form>
 					<h1>Links</h1>
 					<div class="links-list">
