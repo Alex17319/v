@@ -96,6 +96,7 @@
 						</div>
 					</div>
 				</section>
+				<links-section v-if="urlHash"></links-section>
 				<section class="section-edit">
 					<details>
 						<summary v-if="urlHash" class="h1" v-cloak>Edit</summary>
@@ -182,12 +183,8 @@
 							</div>
 						</form>
 					</details>
-					<h1>Links</h1>
-					<div class="links-list">
-						<url-display :url="eventUrl"></url-display>
-						<url-display :url="eventUrlSmallestEncoded"></url-display>
-					</div>
 				</section>
+				<links-section v-if="!urlHash"></links-section>
 				<section class="section-faq">
 					<details>
 						<summary class="h1">FAQ</summary>
@@ -244,6 +241,15 @@
 				</section>
 			</main>
 		</div>
+		<template id="links-section">
+			<section class="section-links">
+				<h1>Links</h1>
+				<div class="links-list">
+					<url-display :url="eventUrl"></url-display>
+					<url-display :url="eventUrlSmallestEncoded"></url-display>
+				</div>
+			</section>
+		</template>
 		<template id="url-display">
 			<div @copy="removeNewlinesFromManualCopy">
 				<div class="url-preview-row">
