@@ -249,6 +249,9 @@ input {
 .row.background-inputs .rng {
 	flex-grow: 1;
 }
+.floating-regenerate-button {
+	position: fixed;
+}
 
 /* attempt to hide the native date picker. this only works on some platforms,
  * so other platforms will still show the date picker (this is the best we can do) */
