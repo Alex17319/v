@@ -25,6 +25,10 @@ footer {
 	padding-bottom: 2rem;
 }
 
+.footer-content {
+	padding-inline: 13px;
+}
+
 textarea { 
 	resize: block;
 	height: 10em;
