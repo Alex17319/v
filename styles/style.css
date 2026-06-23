@@ -186,18 +186,23 @@ input {
 	overflow: clip;
 	transition: height .25s ease-in-out;
 }
+.section-collapsible .section-heading-toggle-label svg {
+	height: 1.3em;
+    width: 1.3em;
+	transition: transform .25s ease-out;
+}
 .section-collapsible .section-heading-toggle:checked + .section-heading-toggle-label + .section-collapse {
 	/* expand the collapsible area whenever the checkbox is ticked */
 	height: auto;
+}
+.section-collapsible .section-heading-toggle:checked + .section-heading-toggle-label svg {
+	/* rotate the arrow icon whenever the checkbox is ticked */
+	transform: rotate(0.25turn);
 }
 .section-collapsible .section-heading-toggle:focus-visible + .section-heading-toggle-label {
 	/* outline the label whenever anyone tabs to the original checkbox */
 	border: 1px solid #1d7484;
     outline: 0;
-}
-.section-collapsible .section-heading-toggle-label svg {
-	height: 1.3em;
-    width: 1.3em;
 }
 
 .section-collapsible.section-links .links-list {
