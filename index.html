@@ -98,96 +98,104 @@
 				</section>
 				<links-section v-if="urlHash" :event-url="eventUrl" :event-url-smallest-encoded="eventUrlSmallestEncoded"></links-section>
 				<section class="section-edit">
-					<details>
-						<summary v-if="urlHash" class="h1" v-cloak>Edit</summary>
-						<summary v-else class="h1">Create Event</summary>
-						<form>
-							<div class="row">
-								<div class="col-8">
-									<label for="title">Title</label>
-				  					<input type="text" id="title" name="title" v-model="event.title" placeholder="My Event">
-								</div>
-								<div class="col">
-									<label for="location">Location</label>
-				  					<input type="text" id="location" name="location" v-model="event.location" placeholder="Location TBA">
+					<div v-if="urlHash" class="section-heading" v-cloak>
+						<span>Edit</span>
+						<input id="section-edit-collapse-button" class="section-heading-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
+						<label for="section-edit-collapse-button" class="icon-button section-heading-toggle-label">
+							<icon-info></icon-info>
+						</label>
+					</div>
+					<div v-else class="h1">Create Event</div>
+					<form class="section-collapse">
+						<div class="row">
+							<div class="col-8">
+								<label for="title">Title</label>
+								<input type="text" id="title" name="title" v-model="event.title" placeholder="My Event">
+							</div>
+							<div class="col">
+								<label for="location">Location</label>
+								<input type="text" id="location" name="location" v-model="event.location" placeholder="Location TBA">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<label for="start-date">Start</label>
+								<input type="date" id="start-date" name="start-date" v-model="event.startDate" placeholder="2026-01-01">
+								<div class="time-input-clearable">
+									<input type="time" id="start-time" name="start-time" v-model="event.startTime" placeholder="12:00">
+									<button type="button" class="icon-button" v-on:click="event.startTime = null"><icon-x></icon-x></button>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col">
-									<label for="start-date">Start</label>
-				  					<input type="date" id="start-date" name="start-date" v-model="event.startDate" placeholder="2026-01-01">
-									<div class="time-input-clearable">
-										<input type="time" id="start-time" name="start-time" v-model="event.startTime" placeholder="12:00">
-										<button type="button" class="icon-button" v-on:click="event.startTime = null"><icon-x></icon-x></button>
-									</div>
-								</div>
-								<div class="col">
-									<label for="end-date">End</label>
-				  					<input type="date" id="end-date" name="end-date" v-model="event.endDate" placeholder="2026-01-01">
-									<div class="time-input-clearable">
-										<input type="time" id="end-time" name="end-time" v-model="event.endTime" placeholder="12:00">
-										<button type="button" class="icon-button" v-on:click="event.endTime = null"><icon-x></icon-x></button>
-									</div>
+							<div class="col">
+								<label for="end-date">End</label>
+								<input type="date" id="end-date" name="end-date" v-model="event.endDate" placeholder="2026-01-01">
+								<div class="time-input-clearable">
+									<input type="time" id="end-time" name="end-time" v-model="event.endTime" placeholder="12:00">
+									<button type="button" class="icon-button" v-on:click="event.endTime = null"><icon-x></icon-x></button>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col">
-									<label for="timezone">Timezone</label>
-									<div class="timezone-input-collapsible">
-										<v-select id="timezone" name="timezone" class="search-and-select-box" v-model="event.prettyTimezone" :options="possiblePrettyTimezones"></v-select>
-										<input id="timezone-details-button" class="timezone-details-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
-	 									<label for="timezone-details-button" class="icon-button timezone-details-toggle-label">
-											<icon-info></icon-info>
-										</label>
-										<div class="timezone-details">
-											<div class="timezone-details-heading">Event runs from:</div>
-											<div><span v-text="event.startDateTimeUTC || '\u2014'"></span> to <span v-text="event.endDateTimeUTC || '\u2014'"></span></div>
-											<div><span v-text="event.startDateTimeWithOffset || '\u2014'"></span> to <span v-text="event.endDateTimeWithOffset || '\u2014'"></span></div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col">
-									<label for="rsvp">RSVP</label>
-			  						<input type="text" id="rsvp" name="rsvp" v-model="event.rsvp" placeholder="eventorganiser@example.com">
-								</div>
-								<div class="col">
-									<label for="rsvp-date">RSVP Date</label>
-			  						<input type="date" id="rsvp-date" name="rsvp-date" v-model="event.rsvpDate" placeholder="2026-01-01">
-								</div>
-							</div>
-							<div class="row background-inputs">
-								<div class="col image-url">
-									<label for="image-url">Image URL</label>
-			  						<input type="url" id="image-url" name="image-url" v-model="event.imageUrl" placeholder="https://example.com/event-poster.png">
-								</div>
-								<div class="col theme">
-									<label for="theme">Theme</label>
-									<v-select id="theme" name="theme" class="search-and-select-box" v-model="event.theme" :options="possibleThemes"></v-select>
-								</div>
-								<div class="col rng">
-									<label for="rng">RNG</label>
-									<div class="theme-rng-regenerable">
-			  							<input type="date" class="date-nopicker" :max="new Date().toISOString().match(/\d\d\d\d-\d\d-\d\d/)[0]" id="rng" name="rng" v-model="event.rng">
-										<button type="button" class="icon-button" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
-										<button type="button" class="icon-button floating-regenerate-button" tabindex="-1" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
+						</div>
+						<div class="row">
+							<div class="col">
+								<label for="timezone">Timezone</label>
+								<div class="timezone-input-collapsible">
+									<v-select id="timezone" name="timezone" class="search-and-select-box" v-model="event.prettyTimezone" :options="possiblePrettyTimezones"></v-select>
+									<input id="timezone-details-button" class="timezone-details-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
+									<label for="timezone-details-button" class="icon-button timezone-details-toggle-label">
+										<icon-info></icon-info>
+									</label>
+									<div class="timezone-details">
+										<div class="timezone-details-heading">Event runs from:</div>
+										<div><span v-text="event.startDateTimeUTC || '\u2014'"></span> to <span v-text="event.endDateTimeUTC || '\u2014'"></span></div>
+										<div><span v-text="event.startDateTimeWithOffset || '\u2014'"></span> to <span v-text="event.endDateTimeWithOffset || '\u2014'"></span></div>
 									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col">
-									<label for="description">Description</label>
-			  						<textarea id="description" name="description" v-model="event.description" placeholder="Description here"></textarea>
+						</div>
+						<div class="row">
+							<div class="col">
+								<label for="rsvp">RSVP</label>
+								<input type="text" id="rsvp" name="rsvp" v-model="event.rsvp" placeholder="eventorganiser@example.com">
+							</div>
+							<div class="col">
+								<label for="rsvp-date">RSVP Date</label>
+								<input type="date" id="rsvp-date" name="rsvp-date" v-model="event.rsvpDate" placeholder="2026-01-01">
+							</div>
+						</div>
+						<div class="row background-inputs">
+							<div class="col image-url">
+								<label for="image-url">Image URL</label>
+								<input type="url" id="image-url" name="image-url" v-model="event.imageUrl" placeholder="https://example.com/event-poster.png">
+							</div>
+							<div class="col theme">
+								<label for="theme">Theme</label>
+								<v-select id="theme" name="theme" class="search-and-select-box" v-model="event.theme" :options="possibleThemes"></v-select>
+							</div>
+							<div class="col rng">
+								<label for="rng">RNG</label>
+								<div class="theme-rng-regenerable">
+									<input type="date" class="date-nopicker" :max="new Date().toISOString().match(/\d\d\d\d-\d\d-\d\d/)[0]" id="rng" name="rng" v-model="event.rng">
+									<button type="button" class="icon-button" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
+									<button type="button" class="icon-button floating-regenerate-button" tabindex="-1" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
 								</div>
 							</div>
-						</form>
-					</details>
+						</div>
+						<div class="row">
+							<div class="col">
+								<label for="description">Description</label>
+								<textarea id="description" name="description" v-model="event.description" placeholder="Description here"></textarea>
+							</div>
+						</div>
+					</form>
 				</section>
 				<links-section v-if="!urlHash" :event-url="eventUrl" :event-url-smallest-encoded="eventUrlSmallestEncoded"></links-section>
-				<section class="section-faq">
-					<details>
-						<summary class="h1">FAQ</summary>
+				<section class="section-collapsible section-faq">
+					<span class="section-heading">FAQ</span>
+					<input id="section-faq-collapse-button" class="section-heading-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
+					<label for="section-faq-collapse-button" class="icon-button section-heading-toggle-label">
+						<icon-info></icon-info>
+					</label>
+					<div class="section-collapse">
 						<h6>What is this? How do I use it?</h6>
 						<p>
 							It's a quick way to share events. Just open a new page, fill out the form, copy a link,
@@ -237,13 +245,17 @@
 						<p>
 							No. TBD legalese.
 						</p>
-					</details>
+					</div>
 				</section>
 			</main>
 		</div>
 		<template id="links-section">
-			<section class="section-links">
-				<h1>Links</h1>
+			<section class="section-collapsible section-links">
+				<span class="section-heading">Links</span>
+				<input id="section-links-collapse-button" class="section-heading-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
+				<label for="section-links-collapse-button" class="icon-button section-heading-toggle-label">
+					<icon-info></icon-info>
+				</label>
 				<div class="links-list">
 					<url-display :url="eventUrl"></url-display>
 					<url-display :url="eventUrlSmallestEncoded"></url-display>
