@@ -100,7 +100,7 @@
 				<section class="section-collapsible section-edit">
 					<span v-if="urlHash" class="section-heading" v-cloak>Edit</span>
 					<input v-if="urlHash" id="section-edit-collapse-button" class="section-heading-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
-					<label v-if="urlHash" for="section-edit-collapse-button" class="icon-button section-heading-toggle-label">
+					<label v-if="urlHash" for="section-edit-collapse-button" class="icon-button icon-button-light section-heading-toggle-label">
 						<icon-chevron-right></icon-chevron-right>
 					</label>
 					<span v-if="!urlHash" class="h1">Create Event</span>
@@ -121,7 +121,7 @@
 								<input type="date" id="start-date" name="start-date" v-model="event.startDate" placeholder="2026-01-01">
 								<div class="time-input-clearable">
 									<input type="time" id="start-time" name="start-time" v-model="event.startTime" placeholder="12:00">
-									<button type="button" class="icon-button" v-on:click="event.startTime = null"><icon-x></icon-x></button>
+									<button type="button" class="icon-button icon-button-light" v-on:click="event.startTime = null"><icon-x></icon-x></button>
 								</div>
 							</div>
 							<div class="col">
@@ -129,7 +129,7 @@
 								<input type="date" id="end-date" name="end-date" v-model="event.endDate" placeholder="2026-01-01">
 								<div class="time-input-clearable">
 									<input type="time" id="end-time" name="end-time" v-model="event.endTime" placeholder="12:00">
-									<button type="button" class="icon-button" v-on:click="event.endTime = null"><icon-x></icon-x></button>
+									<button type="button" class="icon-button icon-button-light" v-on:click="event.endTime = null"><icon-x></icon-x></button>
 								</div>
 							</div>
 						</div>
@@ -139,7 +139,7 @@
 								<div class="timezone-input-collapsible">
 									<v-select id="timezone" name="timezone" class="search-and-select-box" v-model="event.prettyTimezone" :options="possiblePrettyTimezones"></v-select>
 									<input id="timezone-details-button" class="timezone-details-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
-									<label for="timezone-details-button" class="icon-button timezone-details-toggle-label">
+									<label for="timezone-details-button" class="icon-button icon-button-light timezone-details-toggle-label">
 										<icon-info></icon-info>
 									</label>
 									<div class="timezone-details">
@@ -173,8 +173,8 @@
 								<label for="rng">RNG</label>
 								<div class="theme-rng-regenerable">
 									<input type="date" class="date-nopicker" :max="new Date().toISOString().match(/\d\d\d\d-\d\d-\d\d/)[0]" id="rng" name="rng" v-model="event.rng">
-									<button type="button" class="icon-button" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
-									<button type="button" class="icon-button floating-regenerate-button" tabindex="-1" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
+									<button type="button" class="icon-button icon-button-light" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
+									<button type="button" class="icon-button icon-button-dark floating-regenerate-button" tabindex="-1" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
 								</div>
 							</div>
 						</div>
@@ -190,7 +190,7 @@
 				<section class="section-collapsible section-faq">
 					<span class="section-heading">FAQ</span>
 					<input id="section-faq-collapse-button" class="section-heading-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
-					<label for="section-faq-collapse-button" class="icon-button section-heading-toggle-label">
+					<label for="section-faq-collapse-button" class="icon-button icon-button-light section-heading-toggle-label">
 						<icon-chevron-right></icon-chevron-right>
 					</label>
 					<div class="section-collapse">
@@ -251,7 +251,7 @@
 			<section class="section-collapsible section-links">
 				<span class="section-heading">Links</span>
 				<input id="section-links-collapse-button" class="section-heading-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
-				<label for="section-links-collapse-button" class="icon-button section-heading-toggle-label">
+				<label for="section-links-collapse-button" class="icon-button icon-button-light section-heading-toggle-label">
 					<icon-chevron-right></icon-chevron-right>
 				</label>
 				<div class="links-list">
@@ -271,7 +271,7 @@
 						</div>
 						<code v-text="url?.urlHash"></code>
 					</div>
-					<button class="icon-button copy-button" @click="copyUrlToClipboard()">
+					<button class="icon-button icon-button-light copy-button" @click="copyUrlToClipboard()">
 						<icon-clipboard-check v-if="copied" class="copied"></icon-clipboard-check>
 						<icon-clipboard v-else></icon-clipboard>
 					</button>
