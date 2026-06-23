@@ -51,14 +51,14 @@ input {
 
 .section-event-display {
 	width: auto;
-	max-width: calc(min(100svh, 38em));
+	max-width: calc(min(100svh, 42rem));
 	container-type: inline-size;
 	margin-inline: auto;
 }
 .event-display {
 	container-type: size;
-	width: calc(min(100cqw, 100svh, 38em));
-	height: calc(min(100cqw, 100svh, 38em) * 0.9);
+	width: calc(min(100cqw, 100svh, 42rem));
+	height: calc(min(100cqw, 100svh, 42rem) * 0.9);
 	margin-inline: auto;
 	display: grid;
 	justify-items: center;
@@ -125,7 +125,7 @@ input {
 	justify-items: center;
 	align-items: center;
 	justify-content: center;
-	height: calc(min(100cqw, 100svh, 38em) * 0.2);
+	height: calc(min(100cqw, 100svh, 42rem) * 0.2);
 	margin-block-end: 3.75rem;
 }
 @property --cal-scale-numerator { syntax: "<length>"; initial-value: 0px; inherits: false; }
@@ -146,8 +146,8 @@ input {
 
 @media screen and (max-width: 35rem) {
 	.event-display {
-		width: calc(min(100cqw, 100svh, 38em));
-		height: calc(min(100cqw, 100svh, 38em));
+		width: calc(min(100cqw, 100svh, 42rem));
+		height: calc(min(100cqw, 100svh, 42rem));
 	}
 	.event-square {
 		width: 100%;
