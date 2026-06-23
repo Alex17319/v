@@ -254,10 +254,15 @@ input {
 .icon-button-dark:hover {
 	background-color: #794188;
 }
-.icon-button:focus-visible {
+.icon-button-light:focus-visible {
 	border: 1px solid #1d7484;
 	outline: 0;
 }
+.icon-button-dark:focus-visible {
+	border: 2px solid black;
+	outline: 0;
+}
+
 
 .time-input-clearable {
 	display: flex;
@@ -346,6 +351,9 @@ input {
 .section-collapsible.section-edit .section-heading-toggle:checked + .section-heading-toggle-label + .section-collapse button.icon-button.floating-regenerate-button {
 	visibility: visible;
 	transform: none;
+}
+.theme-rng-regenerable button.icon-button.floating-regenerate-button:focus-visible {
+	border: none; /* hide focus. tabindex=-1 prevents tabbing to the button but it can still be focused after clicking. this styling makes the focus invisible */
 }
 .theme-rng-regenerable svg.bi-arrow-repeat {
 	height: 1.3em;
