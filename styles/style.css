@@ -256,7 +256,7 @@ input {
 .time-input-clearable button.icon-button {
 	margin-bottom: 10px;
 }
-.time-input-clearable svg.icon-x {
+.time-input-clearable svg.bi-x {
 	height: 1.8em;
     width: 1.8em;
 }
@@ -300,7 +300,7 @@ input {
 	border: 1px solid #1d7484;
     outline: 0;
 }
-.timezone-details-toggle-label svg.icon-info {
+.timezone-details-toggle-label svg.bi-info-circle {
 	height: 1.3em;
     width: 1.3em;
 }
@@ -323,7 +323,7 @@ input {
     aspect-ratio: 1;
     margin: 0;
 }
-.theme-rng-regenerable svg.icon-repeat {
+.theme-rng-regenerable svg.bi-arrow-repeat {
 	height: 1.3em;
     width: 1.3em;
 }
