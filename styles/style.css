@@ -323,10 +323,18 @@ input {
 }
 .theme-rng-regenerable button.icon-button.floating-regenerate-button {
 	position: fixed;
+	aspect-ratio: 1;
+    margin: 0;
+	/* make the floating regenerate button hidden by default, and slide in and out smoothly */
+	display: none;
+	bottom: -4rem;
+    left: -4rem;
+	transition: bottom 1s ease-out;
+}
+.section-collapsible.section-edit .section-heading-toggle:checked + .section-heading-toggle-label + .section-collapse button.icon-button.floating-regenerate-button {
+	display: flex;
 	bottom: 1rem;
     left: 1rem;
-    aspect-ratio: 1;
-    margin: 0;
 }
 .theme-rng-regenerable svg.bi-arrow-repeat {
 	height: 1.3em;
