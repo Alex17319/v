@@ -300,6 +300,7 @@ const app = Vue.createApp({
     IconInfo: { template: "#icon-info" },
     IconRepeat: { template: "#icon-repeat" },
     IconChevronRight: { template: "#icon-chevron-right" },
+    IconPrideFlag: { template: "#icon-pride-flag" },
   },
   data() {
     return {
