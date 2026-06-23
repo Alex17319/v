@@ -98,14 +98,12 @@
 				</section>
 				<links-section v-if="urlHash" :event-url="eventUrl" :event-url-smallest-encoded="eventUrlSmallestEncoded"></links-section>
 				<section class="section-edit">
-					<div v-if="urlHash" class="section-heading" v-cloak>
-						<span>Edit</span>
-						<input id="section-edit-collapse-button" class="section-heading-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
-						<label for="section-edit-collapse-button" class="icon-button section-heading-toggle-label">
-							<icon-info></icon-info>
-						</label>
-					</div>
-					<div v-else class="h1">Create Event</div>
+					<span v-if="urlHash" class="section-heading" v-cloak>Edit</span>
+					<input v-if="urlHash" id="section-edit-collapse-button" class="section-heading-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
+					<label v-if="urlHash" for="section-edit-collapse-button" class="icon-button section-heading-toggle-label">
+						<icon-info></icon-info>
+					</label>
+					<span v-if="!urlHash" class="h1">Create Event</span>
 					<form class="section-collapse">
 						<div class="row">
 							<div class="col-8">
