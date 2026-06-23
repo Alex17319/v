@@ -4,11 +4,11 @@ html {
 
 body {
 	padding: 0;
-	margin-block-end: 4em;
+	margin: 0;
 	scrollbar-color: #a57bb0 #f1f1f1;
 }
 
-main {
+main, .footer-content {
 	max-width: 38em;
     margin: auto;
 }
@@ -16,7 +16,9 @@ main {
 footer {
 	background-color: #a57bb0;
 	color: white;
-	font-size: 0.5em;
+	font-size: 0.8em;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
 textarea { 
