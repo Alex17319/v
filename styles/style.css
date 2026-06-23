@@ -343,6 +343,12 @@ input {
     margin: 0;
 	bottom: 1rem;
     left: 1rem;
+	box-shadow:
+		0 0.1cqw 0.2cqw hsl(0deg 0% 0% / 0.1),
+		0 0.3cqw 0.4cqw hsl(0deg 0% 0% / 0.1),
+		0 0.4cqw 0.8cqw hsl(0deg 0% 0% / 0.1),
+		0 1.0cqw 1.6cqw hsl(0deg 0% 0% / 0.1),
+		0 2.0cqw 3.2cqw hsl(0deg 0% 0% / 0.15);
 	/* make the floating regenerate button hidden by default, then slide in and out smoothly when the edit section is expended/collapsed */
 	visibility: hidden;
 	transform: translate(-4em, 4em);
