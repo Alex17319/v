@@ -101,7 +101,7 @@
 					<span v-if="urlHash" class="section-heading" v-cloak>Edit</span>
 					<input v-if="urlHash" id="section-edit-collapse-button" class="section-heading-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
 					<label v-if="urlHash" for="section-edit-collapse-button" class="icon-button section-heading-toggle-label">
-						<icon-info></icon-info>
+						<icon-chevron-right></icon-chevron-right>
 					</label>
 					<span v-if="!urlHash" class="h1">Create Event</span>
 					<form class="section-collapse">
@@ -191,7 +191,7 @@
 					<span class="section-heading">FAQ</span>
 					<input id="section-faq-collapse-button" class="section-heading-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
 					<label for="section-faq-collapse-button" class="icon-button section-heading-toggle-label">
-						<icon-info></icon-info>
+						<icon-chevron-right></icon-chevron-right>
 					</label>
 					<div class="section-collapse">
 						<h6>What is this? How do I use it?</h6>
@@ -252,7 +252,7 @@
 				<span class="section-heading">Links</span>
 				<input id="section-links-collapse-button" class="section-heading-toggle" type="checkbox" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
 				<label for="section-links-collapse-button" class="icon-button section-heading-toggle-label">
-					<icon-info></icon-info>
+					<icon-chevron-right></icon-chevron-right>
 				</label>
 				<div class="links-list">
 					<url-display :url="eventUrl"></url-display>
