@@ -184,12 +184,12 @@ input {
 	grid-area: collapse;
 	height: 0;
 	overflow: clip;
-	transition: height .25s ease-in-out;
+	transition: height 0.25s ease-in-out;
 }
 .section-collapsible .section-heading-toggle-label svg {
 	height: 1.3em;
     width: 1.3em;
-	transition: transform .25s ease-out;
+	transition: transform 0.25s ease-out;
 }
 .section-collapsible .section-heading-toggle:checked + .section-heading-toggle-label + .section-collapse {
 	/* expand the collapsible area whenever the checkbox is ticked */
@@ -211,7 +211,7 @@ input {
 .section-collapsible.section-links .links-list .url-stats {
 	height: 0;
     overflow: clip;
-	transition: height .25s ease-in-out;
+	transition: height 0.25s ease-in-out;
 }
 .section-collapsible.section-links .section-heading-toggle:checked + .section-heading-toggle-label + .links-list .url-stats {
 	height: auto;
@@ -293,7 +293,7 @@ input {
 	grid-area: details;
 	height: 0;
 	overflow: clip;
-	transition: height .25s ease-in-out;
+	transition: height 0.25s ease-in-out;
 	margin-block-end: 10px;
 }
 .timezone-details-toggle:checked + .timezone-details-toggle-label + .timezone-details {
@@ -325,16 +325,16 @@ input {
 	position: fixed;
 	aspect-ratio: 1;
     margin: 0;
-	/* make the floating regenerate button hidden by default, and slide in and out smoothly */
-	display: none;
-	bottom: -4rem;
-    left: -4rem;
-	transition: bottom 1s ease-out;
+	bottom: 1rem;
+    left: 1rem;
+	/* make the floating regenerate button hidden by default, then slide in and out smoothly when the edit section is expended/collapsed */
+	visibility: hidden;
+	transform: translate(-4em, 4em);
+	transition: transform 0.25s ease-out, visibility 0.25s;
 }
 .section-collapsible.section-edit .section-heading-toggle:checked + .section-heading-toggle-label + .section-collapse button.icon-button.floating-regenerate-button {
 	display: flex;
-	bottom: 1rem;
-    left: 1rem;
+	transform: none;
 }
 .theme-rng-regenerable svg.bi-arrow-repeat {
 	height: 1.3em;
