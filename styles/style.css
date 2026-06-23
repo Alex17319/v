@@ -8,8 +8,8 @@ body {
 	scrollbar-color: #a57bb0 #f1f1f1;
 }
 
-main {
-	margin-block-end: 3rem;
+.main {
+	margin-block-end: 3rem; /* for some reason this works in ".main {}" but not in "main {}". no idea why */
 }
 
 main, .footer-content {
