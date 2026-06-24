@@ -581,6 +581,11 @@ input {
 	flex-flow: row wrap;
 	column-gap: 0.5rem;
 }
+.footer-content .footer-links-chunk {
+	display: flex;
+	flex-flow: row nowrap;
+	column-gap: 0.5rem;
+}
 .footer-content .footer-icons-area {
 	flex: 0 100 max-content;
 	display: flex;
