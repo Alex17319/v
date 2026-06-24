@@ -579,7 +579,7 @@ input {
 .footer-content .footer-links {
 	display: flex;
 	flex-flow: row wrap;
-	column-gap: 1rem;
+	column-gap: 1.4rem;
 	overflow: clip;
 }
 /* add bullets automatically between footer items. based on https://stackoverflow.com/a/31220698 */
@@ -589,7 +589,7 @@ input {
 .footer-content .footer-links > span:before {
 	content: "•";
 	position: absolute;
-	left: calc(-0.5rem - 5px);
+	left: calc(-0.7rem - 0.15em);
 }
 .footer-content .footer-icons-area {
 	flex: 0 100 max-content;
