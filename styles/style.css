@@ -576,6 +576,11 @@ input {
 	color: white;
 	border-bottom: 1px solid white;
 }
+.footer-content .footer-links {
+	display: flex;
+	flex-flow: row wrap;
+	column-gap: 0.5rem;
+}
 .footer-content .footer-icons-area {
 	flex: 0 100 max-content;
 	display: flex;
