@@ -318,6 +318,7 @@ const app = Vue.createApp({
     IconRepeat: { template: "#icon-repeat" },
     IconChevronRight: { template: "#icon-chevron-right" },
     IconPrideFlag: { template: "#icon-pride-flag" },
+    IconAgplLogo: { template: "#icon-agpl-logo" },
   },
   data() {
     return {
