@@ -564,6 +564,18 @@ input {
 .footer-content .footer-text {
 	flex: 1;
 }
+.footer-content .footer-text a {
+	color: white;
+	border-bottom: none;
+}
+.footer-content .footer-text a:hover {
+	color: white;
+	border-bottom: 2px solid white;
+}
+.footer-content .footer-text a:visited {
+	color: white;
+	border-bottom: none;
+}
 .footer-content .footer-icons-area {
 	flex: 0 1 max-content;
 	display: flex;
