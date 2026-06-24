@@ -564,6 +564,15 @@ input {
 .footer-content .footer-text {
 	flex: 1;
 }
+.footer-content .footer-icons-area {
+	flex: 0 1 max-content;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+}
 .footer-content .footer-icon {
 	display: flex;
 	padding: 0;
