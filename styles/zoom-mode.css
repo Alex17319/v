@@ -1,10 +1,29 @@
 /*
-	By default, the event square is sized dynamically to fit the user's device (both
-	horizontally and vertically). This is great usually, but unhelpful for accessibility,
-	as it makes it impossible to zoom in on the event square (on a desktop device; mobile
-	users can still pinch to zoom). This CSS file can be included programatically to
-	override the default styling and force the event square to use a size based on rem
-	units, so that the user can zoom as normal.
+Copyright (C) 2026 amorphea
+
+This file is part of UtilV.
+
+UtilV is free software: you can redistribute it and/or modify it under the
+terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+UtilV is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+details.
+
+You should have received a copy of the GNU Affero General Public License
+along with UtilV. If not, see <https://www.gnu.org/licenses/>.
+*/
+
+/*
+By default, the event square is sized dynamically to fit the user's device (both
+horizontally and vertically). This is great usually, but unhelpful for accessibility,
+as it makes it impossible to zoom in on the event square (on a desktop device; mobile
+users can still pinch to zoom). This CSS file can be included programatically to
+override the default styling and force the event square to use a size based on rem
+units, so that the user can zoom as normal.
 */
 .section-event-display {
 	width: 42rem !important;
