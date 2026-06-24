@@ -303,12 +303,6 @@ const linksSectionComponent = {
   },
 };
 
-/*const eventSquareComponent = {
-  template: "#event-square",
-  components: {},
-  props: 
-}*/
-
 const app = Vue.createApp({
   components: {
     LinksSection: linksSectionComponent,
@@ -333,10 +327,6 @@ const app = Vue.createApp({
     };
   },
   methods: {
-    // displayDatetime(datetime) {
-    // 	if (!datetime) return "";
-    // 	return datetime.replace(/(?<yyyy>\d\d\d\d)-(?<MM>\d\d)-(?<dd>\d\d)T?(?<hh>\d\d)?:?(?<mm>\d\d)?/, "$<>")
-    // },
     encode(str) {
       return unibinary.encodeString(str);
     },
@@ -393,24 +383,6 @@ const app = Vue.createApp({
     unescapeEventStringPart(str) {
       if (!str) return "";
       return decodeURIComponent(str.replace(/\+/g, " ").replace(/\~/g, "%"));
-      
-      /*
-      let newStr = "";
-      for (let i = 0; i < str.length; ) {
-        if (str.charAt(i) === "+") { newStr += " "; i++; continue; }
-        
-        const chunk = str.substring(i, i + 3);
-        if (chunk === "~7E") { newStr += "~"; i += 3; continue; }
-        if (chunk === "~7C") { newStr += "|"; i += 3; continue; }
-        if (chunk === "~2B") { newStr += "+"; i += 3; continue; }
-        if (chunk === "~60") { newStr += "`"; i += 3; continue; }
-
-        for (let j = i + 3; j < str.length; ) {
-          let bigChunk = str.substring(i, j);
-          if (/^(\~[0-9a-fA-F][0-9a-fA-F])$/.test(bigChunk))
-          newStr += decodeURIComponent(chunk.replace("~", "%"))
-        }
-      } */
     },
     parseDatetime(datestr) {
       if (!datestr) return null;
@@ -445,7 +417,7 @@ const app = Vue.createApp({
     getUrlBase() {
       return (window.location.host + window.location.pathname).replace(/[\/\\]+$/,'');
     },
-    parseEventString_old(arr) {
+    parseEventString_old1(arr) {
       const themeMatch = arr[7] && arr[7].match(/^(?<theme>[a-zA-Z]+)(?<rng>[0-9][0-9][0-9])$/);
       const theme = themeMatch && themeMatch.groups.theme?.toLowerCase();
       const rng = themeMatch && themeMatch.groups.rng && this.parseDate(themeMatch.groups.rng) || DateUtils.getTodaysDateString();
@@ -473,13 +445,7 @@ const app = Vue.createApp({
         this.unescapeEventStringPart(arr[8]) || "" // description
       )
     },
-    parseEventString(str) {
-      if (!str) return null;
-      const arr = str.split("|");
-      if (arr.length < 3) return null; // require at least a title, location, and start time
-
-      if (arr.length === 9) return this.parseEventString_old(arr); // temporary backwards compatibility to update existing event strings
-      
+    parseEventString_old2(arr) {
       const themeMatch = arr[9] && arr[9].match(/^(?<theme>[a-zA-Z]+)(?<rng>\d\d\d\d\d\d\d\d)$/);
       const theme = themeMatch && themeMatch.groups.theme?.toLowerCase();
       const rng = themeMatch && themeMatch.groups.rng && this.parseDate(themeMatch.groups.rng) || DateUtils.getTodaysDateString();
@@ -509,6 +475,45 @@ const app = Vue.createApp({
         theme || "", // theme
         rng, // rng
         this.unescapeEventStringPart(arr[10]) || "" // description
+      )
+    },
+    parseEventString(str) {
+      if (!str) return null;
+      const arr = str.split("|");
+      if (arr.length < 3) return null; // require at least a title, location, and start time
+
+      if (arr.length === 9) return this.parseEventString_old1(arr); // temporary backwards compatibility to update existing event strings
+      if (arr.length === 11) return this.parseEventString_old2(arr); // temporary backwards compatibility to update existing event strings
+      
+      const themeMatch = arr[10] && arr[10].match(/^(?<theme>[a-zA-Z\-]+)(?<rng>\d\d\d\d\d\d\d\d)$/);
+      const theme = themeMatch && themeMatch.groups.theme?.toLowerCase();
+      const rng = themeMatch && themeMatch.groups.rng && this.parseDate(themeMatch.groups.rng) || DateUtils.getTodaysDateString();
+
+      // Reject this event string if there are malformed dates or times (it has probably been parsed wrong, i.e. we should have used unibinDecode)
+      // Don't reject if the dates/times are absent entirely; that's OK
+      const startDate = this.parseDate(arr[2]);
+      const startTime = this.parseTime(arr[3]);
+      const endDate = this.parseDate(arr[4]);
+      const endTime = this.parseTime(arr[5]);
+      if (arr[2] && !startDate) return null;
+      if (arr[3] && !startTime) return null;
+      if (arr[4] && !endDate) return null;
+      if (arr[5] && !endTime) return null;
+      
+      return new Event(
+        this.unescapeEventStringPart(arr[0]) || "", // title
+        this.unescapeEventStringPart(arr[1]) || "", // location
+        startDate || "", // startDate
+        startTime || "", // startTime
+        endDate || "", // endDate
+        endTime || "", // endTime
+        this.unescapeEventStringPart(arr[6]) || "", // timezone
+        this.unescapeEventStringPart(arr[7]) || "", // rsvp
+        this.parseDatetime(arr[8])?.date || "", // rsvpDate
+        this.unescapeEventStringPart(arr[9]) || "", // imageUrl
+        theme || "", // theme
+        rng, // rng
+        this.unescapeEventStringPart(arr[11]) || "" // description
       )
     },
     async loadEventFromUrlHash(urlHash) {
@@ -557,7 +562,8 @@ const app = Vue.createApp({
         this.escapeEventStringPart(this.event.timezone) + "|" +
         this.escapeEventStringPart(this.event.rsvp) + "|" +
         this.formatDate(this.event.rsvpDate) + "|" +
-        (this.escapeEventStringPart(this.event.imageUrl) || this.formatTheme(this.event.theme, this.event.rng)) + "|" +
+        this.escapeEventStringPart(this.event.imageUrl) + "|" +
+        this.formatTheme(this.event.theme, this.event.rng) + "|" +
         this.escapeEventStringPart(this.event.description)
       );
     },
