@@ -332,7 +332,7 @@
 						</div>
 						<code v-text="url?.urlHash"></code>
 					</div>
-					<button class="icon-button icon-button-light copy-button" @click="copyUrlToClipboard()">
+					<button class="icon-button icon-button-light copy-button" aria-label="Copy link" title="Copy link" @click="copyUrlToClipboard()">
 						<icon-clipboard-check v-if="copied" class="copied"></icon-clipboard-check>
 						<icon-clipboard v-else></icon-clipboard>
 					</button>
