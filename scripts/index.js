@@ -328,7 +328,8 @@ const app = Vue.createApp({
       urlHashLoaded: false,
       urlHashLoadFailed: false,
       possibleTimezones: Intl.supportedValuesOf('timeZone'),
-      possibleThemes: ThemesDB.getPossibleThemes()
+      possibleThemes: ThemesDB.getPossibleThemes(),
+      zoomMode: false,
     };
   },
   methods: {
