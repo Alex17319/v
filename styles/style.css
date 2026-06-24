@@ -579,3 +579,7 @@ input {
     height: calc((325 / 512) * 4rem);
     width: calc((512 / 512) * 4rem);
 }
+.footer-content .footer-icon-circle {
+	background: white;
+	border-radius: 10em;
+}
