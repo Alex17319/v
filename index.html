@@ -311,8 +311,13 @@
 		</div>
 		<template id="calendar-buttons">
 			<div>
-				<a :href="googleCalendarLink">Add to calendar</a>
-				<a :href="mobileGoogleCalendarIntent">Add to mobile calendar</a>
+				<div>
+					Add to calendar
+				</div>
+				<div>
+					<a v-if="!isAndroid" :href="googleCalendarLink">Google calendar</a>
+					<a v-if="isAndroid" :href="mobileGoogleCalendarIntent">Google calendar</a>
+				</div>
 			</div>
 		</template>
 		<template id="links-section">
