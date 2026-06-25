@@ -44,10 +44,10 @@ const calendarButtonsComponent = {
 	},
 	computed: {
 		googleCalendarLink() {
-			return 'https://calendar.google.com/calendar/r/eventedit?' + this.googleCalendarLinkParams(); // can also use 'https://calendar.google.com/calendar/render?action=TEMPLATE&'
+			return 'https://calendar.google.com/calendar/r/eventedit?' + this.googleCalendarLinkParams; // can also use 'https://calendar.google.com/calendar/render?action=TEMPLATE&'
 		},
 		mobileGoogleCalendarLink() {
-			return 'https://calendar.google.com/calendar/gp#~calendar:view=e&bm=1?' + this.googleCalendarLinkParams();
+			return 'https://calendar.google.com/calendar/gp#~calendar:view=e&bm=1?' + this.googleCalendarLinkParams;
 		},
 		googleCalendarLinkParams() {
 			// See: https://github.com/InteractionDesignFoundation/add-event-to-calendar-docs/blob/main/services/google.md
