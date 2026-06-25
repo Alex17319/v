@@ -41,18 +41,27 @@ const calendarButtonsComponent = {
 		joinTruthyStrings(separator, ...strings) {
 			return strings.filter(x => !!x).join(separator);
 		},
+		googleCalendarLinkPrefix() {
+			return 'calendar.google.com/calendar/render?action=TEMPLATE&';
+			// Other options, which didn't work well on mobile:
+			// calendar.google.com/calendar/r/eventedit?
+			// calendar.google.com/calendar/gp#~calendar:view=e&bm=1?
+		},
 	},
 	computed: {
 		// See: https://github.com/InteractionDesignFoundation/add-event-to-calendar-docs/blob/main/services/google.md
 		// See: https://stackoverflow.com/questions/10488831/link-to-add-to-google-calendar
 		googleCalendarLink() {
-			return 'https://calendar.google.com/calendar/r/eventedit?' + this.googleCalendarLinkParams;
-		},
-		mobileGoogleCalendarLink() {
-			return 'https://calendar.google.com/calendar/render?action=TEMPLATE&' + this.googleCalendarLinkParams; // previously tried: https://calendar.google.com/calendar/gp#~calendar:view=e&bm=1?
+			return 'https://' + this.googleCalendarLinkPrefix() + this.googleCalendarLinkParams;
 		},
 		mobileGoogleCalendarIntent() {
-			return 'intent://calendar.google.com/calendar/render?action=TEMPLATE&' + this.googleCalendarLinkParams + '#Intent;scheme=https;package=com.google.android.calendar;S.browser_fallback_url=' + this.encode('https://calendar.google.com/calendar/render?action=TEMPLATE&' + this.googleCalendarLinkParams) + ';end';
+			return (
+				'intent://' +
+				this.googleCalendarLinkPrefix() + this.googleCalendarLinkParams +
+				'#Intent;scheme=https;package=com.google.android.calendar;S.browser_fallback_url=' +
+				this.encode('https://' + this.googleCalendarLinkPrefix() + this.googleCalendarLinkParams) +
+				';end'
+			);
 		},
 		googleCalendarLinkParams() {
 			
