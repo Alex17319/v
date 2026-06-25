@@ -176,6 +176,30 @@ input {
 	}
 }
 
+.calendar-buttons-heading {
+	text-transform: uppercase;
+	font-size: 2cqw;
+	font-weight: bold;
+}
+.calendar-buttons-list {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 2cqw;
+}
+.calendar-button {
+	background-color: white;
+	border-radius: 10cqw;
+	font-size: 4cqw;
+	box-shadow:
+		0 0.1cqw 0.2cqw hsl(0deg 0% 0% / 0.1),
+		0 0.3cqw 0.4cqw hsl(0deg 0% 0% / 0.1),
+		0 0.4cqw 0.8cqw hsl(0deg 0% 0% / 0.1),
+		0 1.0cqw 1.6cqw hsl(0deg 0% 0% / 0.1),
+		0 2.0cqw 3.2cqw hsl(0deg 0% 0% / 0.15);
+}
+
 .section-heading {
 	line-height: 1;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
