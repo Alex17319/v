@@ -15,6 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with UtilV. If not, see <https://www.gnu.org/licenses/>.
 
+"use strict";
+
 class Event {
   constructor(title, location, startDate, startTime, endDate, endTime, timezone, rsvp, rsvpDate, imageUrl, theme, rng, description) {
     this.state = Vue.reactive({
