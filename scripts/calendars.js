@@ -52,7 +52,7 @@ const calendarButtonsComponent = {
 			return 'https://calendar.google.com/calendar/render?action=TEMPLATE&' + this.googleCalendarLinkParams; // previously tried: https://calendar.google.com/calendar/gp#~calendar:view=e&bm=1?
 		},
 		mobileGoogleCalendarIntent() {
-			return 'intent://https://calendar.google.com/calendar/render?action=TEMPLATE&' + this.googleCalendarLinkParams + '#Intent;scheme=https;package=com.google.android.calendar;S.browser_fallback_url=' + this.encode('https://calendar.google.com/calendar/render?action=TEMPLATE&' + this.googleCalendarLinkParams) + ';end';
+			return 'intent://calendar.google.com/calendar/render?action=TEMPLATE&' + this.googleCalendarLinkParams + '#Intent;scheme=https;package=com.google.android.calendar;S.browser_fallback_url=' + this.encode('https://calendar.google.com/calendar/render?action=TEMPLATE&' + this.googleCalendarLinkParams) + ';end';
 		},
 		googleCalendarLinkParams() {
 			
