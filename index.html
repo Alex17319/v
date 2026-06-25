@@ -96,24 +96,7 @@
 						</div>
 					</div>
 					<div class="calendar-buttons-display" v-if="urlHashLoaded" v-cloak>
-						<div class="calendar-buttons">
-							<add-to-calendar-button
-								:name="event.title || 'Event'"
-								:location="event.location || 'Location TBC'"
-								:startDate="event.startDate || '2026-03-03'"
-								:endDate="event.startDate || '2026-03-03'"
-								:startTime="event.startTime || '13:00'"
-								:endTime="event.endTime || '17:00'"
-								timeZone="EST"
-								debug
-								options="'Apple','Google','iCal','Outlook.com','Yahoo'"
-								buttonsList
-								hideTextLabelButton
-								buttonStyle="round"
-								lightMode="bodyScheme"
-							></add-to-calendar-button>
-							<calendar-buttons :event="event"></calendar-buttons>
-						</div>
+						<calendar-buttons :event="event"></calendar-buttons>
 					</div>
 				</section>
 				<links-section v-if="urlHash" :event-url="eventUrl" :event-url-smallest-encoded="eventUrlSmallestEncoded"></links-section>
@@ -310,7 +293,7 @@
 			</footer>
 		</div>
 		<template id="calendar-buttons">
-			<div>
+			<div class="calendar-buttons">
 				<div class="calendar-buttons-heading">
 					Add to calendar
 				</div>
