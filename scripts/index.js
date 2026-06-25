@@ -20,6 +20,7 @@
 const app = Vue.createApp({
   components: {
     LinksSection: linksSectionComponent,
+    CalendarButtons: calendarButtonsComponent,
     'v-select': window['vue-select'],
     IconX: { template: "#icon-x" },
     IconInfo: { template: "#icon-info" },
