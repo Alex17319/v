@@ -65,12 +65,13 @@ const calendarButtonsComponent = {
 				? this.encodeCompactDate(start) + "/" + this.encodeCompactDate(end)
 				: this.encodeCompactDateTime(start) + "/" + this.encodeCompactDateTime(end);
 			
-			return
+			return (
 				'text=' + this.encode(this.event.title) +
 				"&dates=" + dateString +
 				(this.event.timezone ? "&ctz=" + this.encode(this.event.timezone) : "") +
 				(this.event.location ? "&location=" + this.encode(this.event.location) : "") +
-				((this.event.description || this.event.rsvpString) ? "&details=" + this.encode(this.joinTruthyStrings("\r\n\r\n", this.event.rsvpString, this.event.description)) : "");
+				((this.event.description || this.event.rsvpString) ? "&details=" + this.encode(this.joinTruthyStrings("\r\n\r\n", this.event.rsvpString, this.event.description)) : "")
+			);
 		},
 	}
 };
