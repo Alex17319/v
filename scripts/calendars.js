@@ -40,13 +40,13 @@ const calendarButtonsComponent = {
 			// Example: 20260626
 			return date ? DateUtils.formatLocalISOTime(date).replace(/T.*$/, "").replace(/-/g, "") : "";
 		},
-		encodeZonedGoogleDate(date) {
-			// Example: 20260626Z
-			return date ? date.toISOString().replace(/T.*$/, "Z").replace(/-/g, "") : "";
-		},
 		encodeWallClockGoogleDateTime(date) {
 			// Example: 20260626T114500
 			return date ? DateUtils.formatLocalISOTime(date).replace(/\.\d\d\d/, "").replace(/-|:/g, "").replace(/Z$/, "") : "";
+		},
+		encodeZonedGoogleDate(date) {
+			// Example: 20260626Z
+			return date ? date.toISOString().replace(/T.*$/, "Z").replace(/-/g, "") : "";
 		},
 		encodeZonedGoogleDateTime(date) {
 			// Example: 20260626T114500Z
@@ -99,12 +99,21 @@ const calendarButtonsComponent = {
 			);
 		},
 		googleCalendarLinkParams() {
+			// There are two categories of event times to deal with: 'zoned' times (with a timezone) and 'wall-clock' times (with no timezone)
+			//  - For zoned times, we can use utcStartDateObj, and then call .toISOString() to print it for the calendar link
+			//  - For wall-clock times, we can use startDateObj, and then call DateUtils.formatLocalISOTime() to print it for the calendar link
+			// 
+			// Note that we CANNOT use .toISOString() on a wall-clock time. The startDateObj is a local representation of the wall-clock time, stored
+			// as a UTC time based on the user's current timezone (different user devices, in different timezones, will use a different UTC time to represent
+			// the same wall-clock time). Calling DateUtils.formatLocalISOTime() safely converts the time back to a wall-clock representation
+			// based on the current user's timezone
+			
 			let start = this.event.utcStartDateObj || this.event.startDateObj;
 			let end = this.event.utcEndDateObj || this.event.endDateObj;
-			let startIsZoned = !!this.event.utcStartDateObj; // is the start time a 'zoned' time (i.e. one with a timezone) or a 'wall-clock' time?
-			let endIsZoned = !!this.event.utcEndDateObj; // is the end time a 'zoned' time (i.e. one with a timezone) or a 'wall-clock' time?
+			let startIsZoned = !!this.event.utcStartDateObj;
+			let endIsZoned = !!this.event.utcEndDateObj;
 			
-			if (!start || !end || !this.event.title) return null; // these parameters are required for google calendar
+			if (!start || !end || !this.event.title) return null; // these parameters are required by google calendar
 
 			if (this.event.allDay && end.getDate() == start.getDate() && end.getMonth() == start.getMonth() && end.getFullYear() == start.getFullYear()) {
 				// google calendar requires all-day events to have start/end dates that are 1 day apart
@@ -112,7 +121,7 @@ const calendarButtonsComponent = {
 				end.setDate(end.getDate() + 1);
 			}
 			
-			const dateString = this.encodeGoogleDate(start, startIsZoned, !this.event.allDay) + "/" + this.encodeGoogleDate(end, endIsZoned, !this.event.allDay);
+			const dateString = this.encodeGoogleDate(start, startIsZoned, !this.event.allDay) + "/" + this.encodeGoogleDate(end, endIsZoned, !this.event.allDay); // omit the time for all-day events, include it otherwise
 			
 			return (
 				'text=' + this.encode(this.event.title) +
