@@ -41,7 +41,7 @@ const calendarButtonsComponent = {
 		},
 		encodeOutlookDateTime(dateISOStr) {
 			// Example: 2026-06-26T11%3A45%3A00
-			return dateObj ? dateISOStr.replace(/\.\d\d\d/, "").replace(/:/g, "%3A") : "";
+			return dateISOStr ? dateISOStr.replace(/\.\d\d\d/, "").replace(/:/g, "%3A") : "";
 		},
 		joinTruthyStrings(separator, ...strings) {
 			return strings.filter(x => !!x).join(separator);
