@@ -138,6 +138,22 @@ input {
 	text-align: center;
 }
 
+.section-image-credit {
+    width: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+}
+.section-image-credit div {
+	width: 80%;
+	text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.6rem;
+    text-align: right;
+    font-style: italic;
+}
+
 :root {
 	--cal-scale: 1;
 }
@@ -168,6 +184,9 @@ input {
 	}
 	:root {
 		--cal-scale: 0.7;
+	}
+	.section-image-credit div {
+		width: 100%;
 	}
 }
 
