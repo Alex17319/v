@@ -94,6 +94,9 @@ const calendarButtonsComponent = {
 			// https://customer.io/tools/calendar-link-generator
 			// https://gist.github.com/miwebguy/2e805e343e0d434f06f2194b92b925d8
 		},
+		office365CalendarLinkPrefix() {
+			return 'outlook.office.com/calendar/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&';
+		},
 	},
 	computed: {
 		isAndroid() {
@@ -143,8 +146,11 @@ const calendarButtonsComponent = {
 		outlookCalendarLink() {
 			return 'https://' + this.outlookCalendarLinkPrefix() + this.outlookCalendarLinkParams;
 		},
+		office365CalendarLink() {
+			return 'https://' + this.office365CalendarLinkPrefix() + this.outlookCalendarLinkParams;
+		},
 		outlookCalendarLinkParams() {
-			// Outlook ignores UTC times sadly, and appears to have no way to specify a timezone,
+			// Outlook appears to ignore UTC times sadly (adding a 'Z' didn't work when tested), and it appears to have no way to specify a timezone separately either,
 			// so we handle the next part differently from Google:
 			// 
 			// There are two categories of event times to deal with: 'zoned' times (with a timezone) and 'wall-clock' times (with no timezone)
