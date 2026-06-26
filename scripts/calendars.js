@@ -130,8 +130,8 @@ const calendarButtonsComponent = {
 			
 			return (
 				'allday=' + (this.event.allDay ? 'true' : 'false') +
-				'&startdt=' + this.encodeOutlookDateTime(start) +
-				(!hideEndTime ? '&enddt=' + this.encodeOutlookDateTime(end) : "") +
+				'&startdt=' + this.encodeOutlookDateTime(startStr) +
+				(!hideEndTime ? '&enddt=' + this.encodeOutlookDateTime(endStr) : "") +
 				(this.event.title ? "&subject=" + this.encode(this.event.title) : "") +
 				(this.event.location ? "&location=" + this.encode(this.event.location) : "") +
 				((this.event.description || this.event.rsvpString) ? "&body=" + this.encode(this.joinTruthyStrings("\r\n\r\n", this.event.rsvpString, this.event.description)) : "")
