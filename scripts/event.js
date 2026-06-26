@@ -89,7 +89,7 @@ class Event {
     addComputed('startOnTheHour', () => s.startDetails?.mm === "00");
     addComputed('endOnTheHour', () => s.endDetails?.mm === "00");
 
-    addComputed('allDay', () => s.startDetails?.hh === null && s.startDetails?.mm === null && s.endDetails?.hh === null && s.endDetails?.mm === null);
+    addComputed('allDay', () => s.startDetails?.hh == null && s.startDetails?.mm == null && s.endDetails?.hh == null && s.endDetails?.mm == null);
 
     addComputed('year', () => s.startDetails?.yyyy);
     addComputed('endYear', () => this.multiYear ? s.endDetails?.yyyy : null);
