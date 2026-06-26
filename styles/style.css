@@ -143,7 +143,6 @@ input {
 	justify-items: center;
 	align-items: center;
 	justify-content: center;
-    margin-block-end: 2.5rem;
 }
 .calendar-buttons {
 	display: flex;
@@ -151,6 +150,8 @@ input {
 	gap: 1.3rem;
 	align-items: center;
 	justify-content: center;
+	margin-block-start: 2.5rem;
+    margin-block-end: 2.5rem;
 }
 
 @media screen and (max-width: 35rem) {
