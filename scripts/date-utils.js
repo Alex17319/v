@@ -56,6 +56,11 @@ class DateUtils {
     return new Date(datetimeString + attempt2.replace("UTC", "").replace("\u2212","-"));
   }
 
+  static formatLocalISOTime(dateObj) {
+    // Converts a date (stored in UTC time) into the current user's local time zone, and prints it in the same format as Date.toISOString() (but without the 'Z' at the end)
+    return new Intl.DateTimeFormat("ja-JP", {dateStyle: "short", timeStyle: "short"}).format(dateObj).replace(/\//g, "-").replace(/ /g, "T") + ":00" // Example time in ja-JP format: "2026/04/04 16:30"
+  }
+
   // Convert IANA timezones to and from pretty timezones by replacing slashes "/" with chevrons " › " and replacing underscores with spaces
   static toPrettyTimezone(timezone) {
     return timezone?.replace(/\//g, ' \u203A ')?.replace(/_/g, ' ');
