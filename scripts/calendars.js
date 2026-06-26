@@ -39,10 +39,10 @@ const calendarButtonsComponent = {
 			// Example: 20260626T114500Z
 			return dateObj ? this.encode(dateObj.toISOString().replace(/\.\d\d\d/, "").replace(/-|:/g, "").replace(/Z$/, isUTC ? "Z" : "")) : "";
 		},
-		encodeOutlookDateTime(dateObj, isUTC) {
+		encodeOutlookDateTime(dateObj) {
 			// Example: 2026-06-26T11%3A45%3A00
-			return dateObj ? dateObj.toISOString().replace(/\.\d\d\d/, "").replace(/:/g, "%3A").replace(/Z$/, isUTC ? "Z" : "") : "";
-		}
+			return dateObj ? dateObj.toISOString().replace(/\.\d\d\d/, "").replace(/:/g, "%3A").replace(/Z$/, "") : "";
+		},
 		joinTruthyStrings(separator, ...strings) {
 			return strings.filter(x => !!x).join(separator);
 		},
