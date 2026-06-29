@@ -37,7 +37,7 @@ const calendarButtonsComponent = {
 		},
 		encodeGoogleDate(date, isZoned, includeTime) {
 			if (isZoned) return includeTime ? this.encodeZonedGoogleDateTime(date) : this.encodeZonedGoogleDate(date);
-			else return includeTime ? this.encodeWallClockGoogleDateTime(date) : encodeWallClockGoogleDate(date);
+			else return includeTime ? this.encodeWallClockGoogleDateTime(date) : this.encodeWallClockGoogleDate(date);
 		},
 		encodeWallClockGoogleDate(date) {
 			// Example: 20260626
