@@ -140,6 +140,8 @@ input {
 
 .section-image-credit {
     width: 100%;
+	max-width: calc(min(100svh, 42rem));
+    margin-inline: auto;
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
