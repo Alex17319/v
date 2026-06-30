@@ -65,7 +65,7 @@ const calendarButtonsComponent = {
 		fixAllDayEventEnd(start, end) {
 			// Some calendars require all-day events to have start/end dates that are 1 day apart
 			// This method returns an end date which meets that requirement (but ONLY if the start and end dates were identical originally; it leaves multi-day all day events untouched)
-			if (end.getDate() == start.getDate() && end.getMonth() == start.getMonth() && end.getFullYear() == start.getFullYear()) {
+			if (start && end && end.getDate() == start.getDate() && end.getMonth() == start.getMonth() && end.getFullYear() == start.getFullYear()) {
 				end = new Date(end);
 				end.setDate(end.getDate() + 1);
 			}
