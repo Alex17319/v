@@ -271,7 +271,9 @@ const app = Vue.createApp({
       this.urlHashLoadFailed = true;
     },
     showThemeInfo() {
-      this.$refs.faqCollapseButton?.checked = true;
+      if (this.$refs.faqCollapseButton) {
+        this.$refs.faqCollapseButton.checked = true;
+      }
       this.$refs.themeInfo?.scrollIntoView({ behavior: "smooth" });
     },
     displayEvent() {
