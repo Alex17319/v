@@ -270,6 +270,10 @@ const app = Vue.createApp({
       }
       this.urlHashLoadFailed = true;
     },
+    showThemeInfo() {
+      this.$refs.faq;
+      this.$refs.themeInfo;
+    },
     displayEvent() {
       history.pushState({}, "", "#" + this.eventUrl.urlHash);
 
