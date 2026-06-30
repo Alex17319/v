@@ -37,9 +37,9 @@ units, so that the user can zoom as normal.
 .event-square {
 	width: 100% !important;
 }
-.calendar-buttons-display {
-	height: calc(min(100cqw, 42rem) * 0.2) !important;
+.section-image-credit {
+	max-width: 42rem !important;
 }
-.calendar-buttons {
-	transform: scale(calc(var(--cal-scale) * 1.1 * (1 / 0.8))) !important;
+.section-image-credit div {
+	width: 97% !important;
 }
