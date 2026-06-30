@@ -96,7 +96,7 @@
 						</div>
 					</div>
 				</section>
-				<section class="section-image-credit">
+				<section v-if="!createModeCurrently && imageCredit" class="section-image-credit">
 					<div>Image credit: <span v-text="imageCredit"></span></div>
 				</section>
 				<section class="section-calendar-buttons" v-if="urlHashLoaded" v-cloak>
