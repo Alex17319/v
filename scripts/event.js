@@ -136,8 +136,8 @@ class Event {
       (newValue) => s.timezone = DateUtils.fromPrettyTimezone(newValue)
     );
 
-    addComputed('utcStartDateObj', () => s.startDate && s.timezone && DateUtils.combineDatetimeAndTimezoneAsUTC(s.startDatetime, s.timezone));
-    addComputed('utcEndDateObj', () => s.endDate && s.timezone && DateUtils.combineDatetimeAndTimezoneAsUTC(s.endDatetime, s.timezone));
+    addComputed('utcStartDateObj', () => s.startDate && s.timezone && DateUtils.combineDatetimeAndTimezoneAsUTC(s.startDate + "T" + (s.startTime || '00:00'), s.timezone));
+    addComputed('utcEndDateObj', () => s.endDate && s.timezone && DateUtils.combineDatetimeAndTimezoneAsUTC(s.endDate + "T" + (s.endTime || '00:00'), s.timezone));
 
     addComputed('startTimezoneOffset', () => s.utcStartDateObj && DateUtils.printTimeZone(s.timezone, 'longOffset', undefined, s.utcStartDateObj));
     addComputed('endTimezoneOffset', () => s.utcEndDateObj && DateUtils.printTimeZone(s.timezone, 'longOffset', undefined, s.utcEndDateObj));
