@@ -105,7 +105,7 @@
 					</div>
 				</section>
 				<links-section v-if="urlHash" :event-url="eventUrl" :event-url-smallest-encoded="eventUrlSmallestEncoded"></links-section>
-				<section class="section-collapsible section-edit">
+				<section :class="urlHash ? 'section-collapsible section-edit' : 'section-edit'">
 					<span v-if="urlHash" class="section-heading" v-cloak>Edit</span>
 					<input v-if="urlHash" id="section-edit-collapse-button" class="section-heading-toggle" type="checkbox" aria-label="Expand or collapse editor" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
 					<label v-if="urlHash" for="section-edit-collapse-button" class="icon-button icon-button-light section-heading-toggle-label" title="Expand/collapse">
@@ -178,7 +178,7 @@
 								<v-select id="theme" name="theme" class="search-and-select-box" v-model="event.theme" :options="possibleThemes"></v-select>
 							</div>
 							<div class="col rng">
-								<label for="rng">RNG</label>
+								<label for="rng">Seed</label>
 								<div class="theme-rng-regenerable">
 									<input type="date" class="date-nopicker" :max="new Date().toISOString().match(/\d\d\d\d-\d\d-\d\d/)[0]" id="rng" name="rng" v-model="event.rng">
 									<button type="button" class="icon-button icon-button-light" aria-label="Randomise event styling" title="Randomise event styling" v-on:click="event.regenerateThemeRNG()"><icon-repeat></icon-repeat></button>
