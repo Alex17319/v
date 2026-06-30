@@ -264,6 +264,9 @@ const app = Vue.createApp({
       }
       this.urlHashLoadFailed = true;
     },
+    displayEvent() {
+      history.pushState({}, "", "#" + this.eventUrl.urlHash);
+    },
   },
   computed: {
     eventString() {
