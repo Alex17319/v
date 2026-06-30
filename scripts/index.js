@@ -38,6 +38,8 @@ const app = Vue.createApp({
       event: new Event("", "", "", "", "", "", DateUtils.getLocalTimeZone(), "", "", "", "", DateUtils.getTodaysDateString(), ""),
       urlBase: this.getUrlBase(),
       urlHash: window.location.hash.replace(/^#/, ''),
+      createModeInitially: !window.location.hash.replace(/^#/, ''),
+      createModeCurrently: !window.location.hash.replace(/^#/, ''),
       urlHashLoaded: false,
       urlHashLoadFailed: false,
       possibleTimezones: Intl.supportedValuesOf('timeZone'),
@@ -274,7 +276,7 @@ const app = Vue.createApp({
       if (this.urlHash) {
         // TODO: scroll page up
       } else {
-        this.urlHash = this.eventUrl.urlHash;
+        this.createModeCurrently = false;
         this.urlHashLoaded = true;
       }
     },
