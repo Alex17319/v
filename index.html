@@ -112,7 +112,7 @@
 						<icon-chevron-right></icon-chevron-right>
 					</label>
 					<span v-if="!urlHash" class="h1">Create Event</span>
-					<form class="section-collapse">
+					<form :class="urlHash ? 'section-collapse' : ''">
 						<div class="row">
 							<div class="col-8">
 								<label for="title">Title</label>
