@@ -36,7 +36,8 @@ const urlDisplayComponent = {
     IconHash: { template: "#icon-hash" },
   },
   props: {
-    url: EventUrlInfo
+    url: EventUrlInfo,
+    urlTitle: String,
   },
   data() {
     return {
