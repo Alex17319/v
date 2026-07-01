@@ -144,73 +144,10 @@ const app = Vue.createApp({
     getUrlBase() {
       return (window.location.host + window.location.pathname).replace(/[\/\\]+$/,'');
     },
-    parseEventString_old1(arr) {
-      const themeMatch = arr[7] && arr[7].match(/^(?<theme>[a-zA-Z]+)(?<rng>[0-9][0-9][0-9])$/);
-      const theme = themeMatch && themeMatch.groups.theme?.toLowerCase();
-      const rng = themeMatch && themeMatch.groups.rng && this.parseDate(themeMatch.groups.rng) || DateUtils.getTodaysDateString();
-
-      // Reject this event string if there are malformed dates (it has probably been parsed wrong, i.e. we should have used unibinDecode)
-      // Don't reject if the dates are absent entirely
-      const start = this.parseDatetime(arr[2]);
-      const end = this.parseDatetime(arr[3]);
-      if (arr[2] && !start) return null;
-      if (arr[3] && !end) return null;
-      
-      return new Event(
-        this.unescapeEventStringPart(arr[0]) || "", // title
-        this.unescapeEventStringPart(arr[1]) || "", // location
-        start?.date || "", // startDate
-        start?.time || "", // startTime
-        end?.date || "", // endDate
-        end?.time || "", // endTime
-        this.unescapeEventStringPart(arr[4]) || "", // timezone
-        this.unescapeEventStringPart(arr[5]) || "", // rsvp
-        this.parseDatetime(arr[6])?.date || "", // rsvpDate
-        !theme ? this.unescapeEventStringPart(arr[7]) : "", // imageUrl
-        theme || "", // theme
-        rng, // rng
-        this.unescapeEventStringPart(arr[8]) || "" // description
-      )
-    },
-    parseEventString_old2(arr) {
-      const themeMatch = arr[9] && arr[9].match(/^(?<theme>[a-zA-Z]+)(?<rng>\d\d\d\d\d\d\d\d)$/);
-      const theme = themeMatch && themeMatch.groups.theme?.toLowerCase();
-      const rng = themeMatch && themeMatch.groups.rng && this.parseDate(themeMatch.groups.rng) || DateUtils.getTodaysDateString();
-
-      // Reject this event string if there are malformed dates or times (it has probably been parsed wrong, i.e. we should have used unibinDecode)
-      // Don't reject if the dates/times are absent entirely; that's OK
-      const startDate = this.parseDate(arr[2]);
-      const startTime = this.parseTime(arr[3]);
-      const endDate = this.parseDate(arr[4]);
-      const endTime = this.parseTime(arr[5]);
-      if (arr[2] && !startDate) return null;
-      if (arr[3] && !startTime) return null;
-      if (arr[4] && !endDate) return null;
-      if (arr[5] && !endTime) return null;
-      
-      return new Event(
-        this.unescapeEventStringPart(arr[0]) || "", // title
-        this.unescapeEventStringPart(arr[1]) || "", // location
-        startDate || "", // startDate
-        startTime || "", // startTime
-        endDate || "", // endDate
-        endTime || "", // endTime
-        this.unescapeEventStringPart(arr[6]) || "", // timezone
-        this.unescapeEventStringPart(arr[7]) || "", // rsvp
-        this.parseDatetime(arr[8])?.date || "", // rsvpDate
-        !theme ? this.unescapeEventStringPart(arr[9]) : "", // imageUrl
-        theme || "", // theme
-        rng, // rng
-        this.unescapeEventStringPart(arr[10]) || "" // description
-      )
-    },
     parseEventString(str) {
       if (!str) return null;
       const arr = str.split("|");
       if (arr.length < 3) return null; // require at least a title, location, and start time
-
-      if (arr.length === 9) return this.parseEventString_old1(arr); // temporary backwards compatibility to update existing event strings
-      if (arr.length === 11) return this.parseEventString_old2(arr); // temporary backwards compatibility to update existing event strings
       
       const themeMatch = arr[10] && arr[10].match(/^(?<theme>[a-zA-Z\-]+)(?<rng>\d\d\d\d\d\d\d\d)$/);
       const theme = themeMatch && themeMatch.groups.theme?.toLowerCase();
