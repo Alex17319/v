@@ -26,7 +26,7 @@ class ShrinkText {
 		// Then, perform a binary search (4 iterations) to find a good size
 		for (let i = 0; i < 4; i++) {
 			let mean = (minSize + maxSize) / 2;
-			ShrinkText.setFontSize(mean);
+			ShrinkText.setFontSize(element, mean);
 
 			let rect = element.getBoundingClientRect(); // Based on text-fit.js by STRML (https://github.com/STRML/textFit/tree/master)
 			if (rect.height <= maxHeight) {
@@ -35,7 +35,7 @@ class ShrinkText {
 				maxSize = mean;
 			}
 		}
-		ShrinkText.setFontSize(minSize);
+		ShrinkText.setFontSize(element, minSize);
 
 		return minSize;
 	}
