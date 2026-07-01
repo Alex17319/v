@@ -272,14 +272,20 @@ const app = Vue.createApp({
       this.urlHashLoadFailed = true;
     },
     showThemeInfo() {
-      if (!this.$refs.faqCollapseButton || !this.$refs.themeInfo) return;
+      this.showFaqSection(this.$refs.themeInfo);
+    },
+    showUrlsFaq() {
+      this.showFaqSection(this.$refs.urlsFaq);
+    },
+    showFaqSection(sectionRef) {
+      if (!this.$refs.faqCollapseButton || sectionRef) return;
       
       if (this.$refs.faqCollapseButton.checked) {
-        this.$refs.themeInfo.scrollIntoView({ behavior: "smooth" });
+        sectionRef.scrollIntoView({ behavior: "smooth" });
       } else {
         this.$refs.faqCollapseButton.checked = true;
         setTimeout(() => {
-          this.$refs.themeInfo?.scrollIntoView({ behavior: "smooth" });
+          sectionRef.scrollIntoView({ behavior: "smooth" });
         }, 500);
       }
     },
