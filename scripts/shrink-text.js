@@ -1,8 +1,6 @@
 class ShrinkText {
 	static shrinkText(element, maxHeight) {
-		if (!isElement(element)) {
-			return null;
-		}
+		if (!element || !maxHeight) return null;
 
 		ShrinkText.setFontSize(element, 1);
 
