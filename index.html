@@ -104,7 +104,7 @@
 						<calendar-buttons :event="event"></calendar-buttons>
 					</div>
 				</section>
-				<links-section v-if="!createModeInitially" :event-url="eventUrl" :event-url-smallest-encoded="eventUrlSmallestEncoded" :url-faq-callback="urlFaqCallback"></links-section>
+				<links-section v-if="!createModeInitially" :event-url="eventUrl" :event-url-smallest-encoded="eventUrlSmallestEncoded" :url-faq-callback="showUrlsFaq"></links-section>
 				<section class="section-collapsible section-edit">
 					<span class="section-heading" v-text="createModeCurrently ? 'Create Event' : 'Edit'"></span>
 					<input :checked="createModeInitially ? true : null" id="section-edit-collapse-button" class="section-heading-toggle" type="checkbox" aria-label="Expand or collapse editor" autocomplete="off" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
@@ -205,7 +205,7 @@
 						</div>
 					</form>
 				</section>
-				<links-section v-if="createModeInitially" :event-url="eventUrl" :event-url-smallest-encoded="eventUrlSmallestEncoded" :url-faq-callback="urlFaqCallback"></links-section>
+				<links-section v-if="createModeInitially" :event-url="eventUrl" :event-url-smallest-encoded="eventUrlSmallestEncoded" :url-faq-callback="showUrlsFaq"></links-section>
 				<section class="section-collapsible section-faq">
 					<span class="section-heading">FAQ</span>
 					<input id="section-faq-collapse-button" ref="faqCollapseButton" class="section-heading-toggle" type="checkbox" aria-label="Expand or collapse frequently asked questions" v-on:keyup.enter="(event) => event.target.checked = !event.target.checked">
