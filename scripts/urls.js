@@ -38,6 +38,7 @@ const urlDisplayComponent = {
   props: {
     url: EventUrlInfo,
     urlTitle: String,
+    urlFaqCallback: Function,
   },
   data() {
     return {
@@ -68,5 +69,7 @@ const linksSectionComponent = {
   props: {
     eventUrl: EventUrlInfo,
     eventUrlSmallestEncoded: EventUrlInfo,
+    urlFaqCallback: Function,
+    urlFaqLinkText: String,
   },
 };
