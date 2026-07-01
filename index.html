@@ -384,13 +384,14 @@
 					<icon-chevron-right></icon-chevron-right>
 				</label>
 				<div class="links-list">
-					<url-display :url="eventUrl"></url-display>
-					<url-display :url="eventUrlSmallestEncoded"></url-display>
+					<url-display :url="eventUrl" url-title="Plaintext"></url-display>
+					<url-display :url="eventUrlSmallestEncoded" url-title="Condensed"></url-display>
 				</div>
 			</section>
 		</template>
 		<template id="url-display">
-			<div @copy="removeNewlinesFromManualCopy">
+			<div v-on:copy="removeNewlinesFromManualCopy">
+				<div class="url-title" v-text="urlTitle"></div>
 				<div class="url-preview-row">
 					<div class="url-preview">
 						<div class="url-base" v-text="url?.urlBase"></div>
@@ -400,7 +401,7 @@
 						</div>
 						<code v-text="url?.urlHash"></code>
 					</div>
-					<button class="icon-button button-light copy-button" aria-label="Copy link" title="Copy link" @click="copyUrlToClipboard()">
+					<button class="icon-button button-light copy-button" aria-label="Copy link" title="Copy link" v-on:click="copyUrlToClipboard()">
 						<icon-clipboard-check v-if="copied" class="copied"></icon-clipboard-check>
 						<icon-clipboard v-else></icon-clipboard>
 					</button>
