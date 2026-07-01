@@ -278,7 +278,7 @@ const app = Vue.createApp({
       this.showFaqSection(this.$refs.urlsFaq);
     },
     showFaqSection(sectionRef) {
-      if (!this.$refs.faqCollapseButton || sectionRef) return;
+      if (!this.$refs.faqCollapseButton || !sectionRef) return;
       
       if (this.$refs.faqCollapseButton.checked) {
         sectionRef.scrollIntoView({ behavior: "smooth" });
