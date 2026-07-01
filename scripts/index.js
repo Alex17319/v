@@ -271,8 +271,8 @@ const app = Vue.createApp({
       }
       this.urlHashLoadFailed = true;
     },
-    showThemeInfo() {
-      this.showFaqSection(this.$refs.themeInfo);
+    showThemesFaq() {
+      this.showFaqSection(this.$refs.themesFaq);
     },
     showUrlsFaq() {
       this.showFaqSection(this.$refs.urlsFaq);
