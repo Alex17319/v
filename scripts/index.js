@@ -50,7 +50,7 @@ const app = Vue.createApp({
   },
   watch: {
     'event.description': function(newDesc, oldDesc) {
-      this.autoShrinkEventDesc();
+       this.$nextTick(() => this.autoShrinkEventDesc());
     }
   },
   methods: {
