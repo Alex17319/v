@@ -1,5 +1,5 @@
 class ShrinkText {
-	static shrinkText(element, width, maxHeight) {
+	static shrinkText(element, maxHeight) {
 		if (!isElement(element)) {
 			return false;
 		}
