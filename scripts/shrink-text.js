@@ -1,7 +1,7 @@
 class ShrinkText {
 	static shrinkText(element, maxHeight) {
 		if (!isElement(element)) {
-			return false;
+			return null;
 		}
 
 		ShrinkText.setFontSize(element, 1);
@@ -13,15 +13,16 @@ class ShrinkText {
 
 			ShrinkText.setFontSize(element, ShrinkText.getFontSize(element) / 2);
 			
-			if (i >= 10) return false; // Fail if it takes more than 10 iterations
+			if (i >= 10) return null; // Fail if it takes more than 10 iterations
 		}
 
-		// Exit (succeed) if the text didn't shrink at all
-		if (minSize == 1) return true;
-
-		// Then, perform a binary search (4 iterations) to find a good size
 		let minSize = ShrinkText.getFontSize(element);
 		let maxSize = minSize * 2;
+
+		// Exit (succeed) if the text didn't shrink at all
+		if (minSize == 1) return 1;
+
+		// Then, perform a binary search (4 iterations) to find a good size
 		for (let i = 0; i < 4; i++) {
 			let mean = (minSize + maxSize) / 2;
 			ShrinkText.setFontSize(mean);
@@ -34,6 +35,8 @@ class ShrinkText {
 			}
 		}
 		ShrinkText.setFontSize(minSize);
+
+		return minSize;
 	}
 
 	static getFontSize(element) {
