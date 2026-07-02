@@ -270,13 +270,37 @@ const app = Vue.createApp({
       return this.possibleTimezones.map(x => DateUtils.toPrettyTimezone(x))
     },
     themeInfo() {
-      return this.event.theme && ThemesDB.getTheme(this.event.theme) || null;
+      return this.event?.theme && ThemesDB.getTheme(this.event.theme) || null;
     },
     themeAppearance() {
       return this.themeInfo?.chooseAppearance(this.event.rng);
     },
+    custombackgroundImage() {
+      // Generate CSS code for displaying a custom background image from a user-defined url
+      //
+      // We're displaying user defined content here, so we need to be cautious of XSS attacks or similar:
+      //
+      // 1) The image could well be an SVG file, which could contain <script> tags.
+      //    Fortunately, browsers disable <script> tags in SVGs whenever the SVG is a background-image or <img>
+      //    See: https://developer.mozilla.org/en-US/docs/Web/SVG/Guides/SVG_as_an_image
+      //    See: https://www.w3.org/Graphics/SVG/WG/wiki/Features/SVG-as-image
+      //    See: https://stackoverflow.com/questions/16837960/using-javascript-in-a-background-image-svg
+      //    See: http://www.schepers.cc/svg/blendups/embedding.html
+      //
+      // 2) The image url may contain e.g. single quote characters to break out of the "url('')" parameter and
+      //    run custom code. It could also contain URI-encoded strings, e.g. %20 for whitespace.
+      //    If we tried using encodeURI or encodeURIComponent, we'd break any URLs which already included
+      //    URI-encoded strings like %20 etc. Instead, we can use CSS.escape(), which prefixes both ' characters
+      //    (and other characters that might be dangerous to CSS) with backslashes \
+      //
+      // 3) Loading the image from another site will alert that site to the current user's IP address. As far as
+      //    I know, this is pretty unavoidable. I guess the best we can say is, don't wholeheartedly trust links
+      //    sent to you by random strangers! If you open a link from a stranger, they might well know that you
+      //    opened it (i.e. this is effectively no different from usual)
+      return this.event?.imageUrl ? "background-image: url('" + CSS.escape(this.event.imageUrl) + "');" : null;
+    },
     eventSquareStyle() {
-      return (this.themeAppearance?.font ? "font-family: '" + this.themeAppearance.font.name + "';" : "") + (this.themeAppearance?.image ? "background-image: url('" + this.themeAppearance.image.url + "');" + this.themeAppearance.image.textStyling : "");
+      return (this.themeAppearance?.font ? "font-family: '" + this.themeAppearance.font.name + "';" : "") + (this.custombackgroundImage || (this.themeAppearance?.image ? "background-image: url('" + this.themeAppearance.image.url + "');" + this.themeAppearance.image.textStyling : ""));
     },
     imageInfo() {
       return this.themeAppearance?.image?.url?.match(/(?<group>\d\d\d+)-(?<number>\d\d\d+) (?<author>[^ ]+)-(?<year>\d\d\d\d) (?<license>[^ ]+) (?<size>[^ ]+)/u)?.groups
