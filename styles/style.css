@@ -655,6 +655,8 @@ a:hover {
 }
 .section-faq p {
 	font-size: 0.8em;
+	margin-top: 0rem;
+    margin-bottom: 1rem;
 }
 
 .footer-content {
