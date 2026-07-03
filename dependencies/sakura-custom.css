@@ -28,6 +28,13 @@
  * Project: https://github.com/oxalorg/sakura/
  */
 
+/*
+ * Note: sakura.css redefines 1rem, and uses media queries based on px, whereas we want to
+ * use the browser-default definition of 1rem (either 16px or a value chosen by the
+ * user) and use media queries based on rem (better for accessibility).
+ * See: https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/
+ */
+
 /* Body */
 html {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
